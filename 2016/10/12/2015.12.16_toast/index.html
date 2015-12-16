@@ -11,10 +11,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="开源中国社区Header 3
-This is a blockquote.
-This is the second paragraph in the blockquote.
-This is an H2 ,"> 
+    <meta name="description" content="大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：
+puiblic static Context mContext;
+然后在onCrea,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Jie" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -29,7 +28,7 @@ This is an H2 ,">
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle"></h3>
+    <h3 class="subtitle">Handler中显示Toast的问题</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -46,30 +45,24 @@ This is an H2 ,">
     <div class="section">
         <div class="article">
     <div class="main">
-        <h1 class="title"></h1>
+        <h1 class="title">Handler中显示Toast的问题</h1>
         <div class="stuff">
-            <span>十二月 10, 2018</span>
+            <span>十月 12, 2016</span>
             
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/标签/">标签</a></li></ul>
+
 
         </div>
         <div class="content markdown">
-            <h1 id="开源中国社区"><a href="#开源中国社区" class="headerlink" title="开源中国社区"></a>开源中国社区</h1><h3 id="Header-3"><a href="#Header-3" class="headerlink" title="Header 3"></a>Header 3</h3><blockquote>
-<p>This is a blockquote.</p>
-<p>This is the second paragraph in the blockquote.</p>
-<h2 id="This-is-an-H2-in-a-blockquote"><a href="#This-is-an-H2-in-a-blockquote" class="headerlink" title="This is an H2 in a blockquote"></a>This is an H2 in a blockquote</h2></blockquote>
+            <p>大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：</p>
+<p>puiblic static Context mContext;</p>
+<p>然后在onCreate方法中调用  mContext = getApplicationContext();</p>
+<h2 id="mContext就是上下文。"><a href="#mContext就是上下文。" class="headerlink" title="mContext就是上下文。"></a>mContext就是上下文。</h2><p>作者：杰骜不驯丶<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/qq_24542767/article/details/52549924" target="_blank" rel="noopener">https://blog.csdn.net/qq_24542767/article/details/52549924</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
-                <source type="audio/mpeg" src="">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
             </audio>
-            
-                <ul id="audio-list" style="display:none">
-                    
-                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
-                    
-                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
-                    
-                </ul>
             
         </div>
         
@@ -79,7 +72,7 @@ This is an H2 ,">
     </div>
     
         <div class="side">
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开源中国社区"><span class="toc-number">1.</span> <span class="toc-text">开源中国社区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Header-3"><span class="toc-number">1.0.1.</span> <span class="toc-text">Header 3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#This-is-an-H2-in-a-blockquote"><span class="toc-number">1.1.</span> <span class="toc-text">This is an H2 in a blockquote</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mContext就是上下文。"><span class="toc-number">1.</span> <span class="toc-text">mContext就是上下文。</span></a></li></ol>
         </div>
     
 </div>

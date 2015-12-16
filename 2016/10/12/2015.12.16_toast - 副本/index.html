@@ -11,10 +11,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="开源中国社区Header 3
-This is a blockquote.
-This is the second paragraph in the blockquote.
-This is an H2 ,"> 
+    <meta name="description" content="大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：
+puiblic static Context mContext;
+然后在onCrea,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Jie" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -29,7 +28,7 @@ This is an H2 ,">
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">My awesome title</h3>
+    <h3 class="subtitle">Handler中显示Toast的问题</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -46,7 +45,7 @@ This is an H2 ,">
     <div class="section">
         <div class="article">
     <div class="main">
-        <h1 class="title">My awesome title</h1>
+        <h1 class="title">Handler中显示Toast的问题</h1>
         <div class="stuff">
             <span>十月 12, 2016</span>
             
@@ -55,7 +54,11 @@ This is an H2 ,">
 
         </div>
         <div class="content markdown">
-            
+            <p>大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：</p>
+<p>puiblic static Context mContext;</p>
+<p>然后在onCreate方法中调用  mContext = getApplicationContext();</p>
+<h2 id="mContext就是上下文。"><a href="#mContext就是上下文。" class="headerlink" title="mContext就是上下文。"></a>mContext就是上下文。</h2><p>作者：杰骜不驯丶<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/qq_24542767/article/details/52549924" target="_blank" rel="noopener">https://blog.csdn.net/qq_24542767/article/details/52549924</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
@@ -69,7 +72,7 @@ This is an H2 ,">
     </div>
     
         <div class="side">
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mContext就是上下文。"><span class="toc-number">1.</span> <span class="toc-text">mContext就是上下文。</span></a></li></ol>
         </div>
     
 </div>
