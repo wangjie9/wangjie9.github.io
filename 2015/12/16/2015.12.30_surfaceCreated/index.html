@@ -23,72 +23,88 @@ puiblic static Context mContext;
 </html>
 <body class="loading">
     <div id="loader"></div>
-    <div class="nav">
-    <ul id="menu-menu" class="menu">
-        
-        <li class="  menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="https://wangjie9.github.io" title="Github" target="_blank" rel="noopener">Github</a>
-        </li>
-        
-    </ul>
-    <p id="copyright">
-        &copy; 2015 John Doe.
-        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
-        Theme <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a>
-        by Fechin
-    </p>
-</div>
-
-<div id="container">
-    
-<div id="screen">
-    <div id="mark">
-        <div class="layer" data-depth="0.4">
-            <img src="/img/time.jpg" id="cover" crossorigin="anonymous" width="1920" height="1080">
-        </div>
-    </div>
-    <div id="vibrant">
-        <svg viewbox="0 0 2880 1620" height="100%" preserveaspectratio="xMaxYMax slice">
-            <polygon opacity="0.7" points="2000,1620 0,1620 0,0 600,0 "/>
-        </svg>
-        <div></div>
-    </div>
-    <div id="header">
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">surfaceCreated方法报setParameters failed错解决办法</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
         <div>
-            <a class="image-logo" href="/"></a>
-            <div class="icon-menu switchmenu"></div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
         </div>
     </div>
-    
-    <div id="post0">
-        <p>五月 01, 2016</p>
-        <h2><a href="/2016/05/01/2015.12.16_toast/" title="Handler中显示Toast的问题" class="posttitle">Handler中显示Toast的问题</a></h2>
-        <p class="summary">大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：
-...</p>
-    </div>
-    
+    <div class="scrollbar"></div>
 </div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">surfaceCreated方法报setParameters failed错解决办法</h1>
+        <div class="stuff">
+            <span>十二月 16, 2015</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Android/">Android</a></li></ul>
 
-    <div id="primary">
+
+        </div>
+        <div class="content markdown">
+            <p>public void surfaceCreated(SurfaceHolder holder){</p>
+<p>surfaceHolder = holder<br>        Log.d(TAG, “surfaceCreated” + mCamera);</p>
+<pre><code>try {
+    CamcorderProfile profile ;
+
+    int numCameras = Camera.getNumberOfCameras();
+    if (numCameras &gt; 1) {
+    profile = (CamcorderProfile
+                .get(Camera.CameraInfo.CAMERA_FACING_FRONT,CamcorderProfile.QUALITY_HIGH));
+    }
+    else{
+
+        profile = (CamcorderProfile
+                .get(Camera.CameraInfo.CAMERA_FACING_BACK,CamcorderProfile.QUALITY_HIGH));
+    }
+
+//设置camera预览的角度，因为默认图片是倾斜90度的   
+camera.setDisplayOrientation(90); 
+    Camera.Parameters parameters = mCamera.getParameters();
+    parameters.setPreviewSize(profile.videoFrameWidth, profile.videoFrameHeight);
+    mCamera.setParameters(parameters);
+    mCamera.setPreviewDisplay(holder);
+    mCamera.startPreview();
+}
+catch (IOException e) {
+
+}}
+</code></pre><hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
         
-<div class="post">
-    <a href="/2015/12/16/2015.12.30_surfaceCreated/" title="surfaceCreated方法报setParameters failed错解决办法">
-        <img src="/img/time.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>十二月 16, 2015</p>
-        <h3><a href="/2015/12/16/2015.12.30_surfaceCreated/" title="surfaceCreated方法报setParameters failed错解决办法" class="posttitle">surfaceCreated方法报setParameters failed错解决办法</a></h3>
-        <p>public void surfaceCreated(SurfaceHolder holder){
-surfaceHolder = holder     ...</p>
-    </div>
-</div>
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
 
 
     </div>
     
+        <div class="side">
+            
+        </div>
+    
 </div>
-<div id="preview"></div>
 
+
+    </div>
+</div>
 </body>
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
