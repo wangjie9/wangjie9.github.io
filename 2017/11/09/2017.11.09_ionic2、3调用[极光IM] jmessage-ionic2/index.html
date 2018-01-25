@@ -25,7 +25,100 @@ onS,">
 </html>
 <body class="loading">
     <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">ionic2、3调用[极光IM] jmessage-ionic2</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">ionic2、3调用[极光IM] jmessage-ionic2</h1>
+        <div class="stuff">
+            <span>十一月 09, 2017</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/ionic/">ionic</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>jmessage-chenyu </p>
+<p>Jmessage Native<br>为极光IM即时通讯写的ionic2、3写的调用方式</p>
+<p>安装<br>安装插件<br>cordova plugin add jmessage-phonegap-plugin –variable APP_KEY=your_app_key<br>安装ionic2、3调用<br>npm install jmessage-chenyu –save<br>官方文档</p>
+<p>For the full Ionic Native documentation, please visit <a href="https://ionicframework.com/docs/native/" target="_blank" rel="noopener">https://ionicframework.com/docs/native/</a>.</p>
+<p>调用<br>需要把包装类注入到 @NgModule, providers 中，然后调用</p>
+<p>// app.module.ts<br>import {JmessageChenyu} from “jmessage-chenyu”;<br>…</p>
+<p>@NgModule({<br>  …</p>
+<p>  providers: [<br>    …<br>    JmessageChenyu<br>    …<br>  ]<br>  …<br>})<br>export class AppModule { }<br>import {JmessageChenyu} from “jmessage-chenyu”;<br>import { Platform } from ‘ionic-angular’;</p>
+<p>import { NgZone } from ‘@angular/core’;</p>
+<p>@Component({ … })<br>export class MyComponent {</p>
+<p>  constructor(private jMessageChenyu: JmessageChenyu, private platform: Platform) {</p>
+<pre><code>platform.ready().then(() =&gt; {
+
+  // 初始化插件
+  this.jMessageChenyu.init({ isOpenMessageRoaming: true })
+  //用户注册。
+  let obj ={username: id, password: &apos;123456&apos;}
+  //obj对应的参数详情请看文档
+  //https://github.com/jpush/jmessage-phonegap-plugin/wiki/APIs
+  this.jMessageChenyu.register(obj)
+        .then(() =&gt; {
+          this.toast(&quot;注册成功，请登录！&quot;)
+        })
+        .catch((error) =&gt; {
+          this.toast(&quot;注册失败&quot; + JSON.stringify(error))
+        });
+  //用户登录
+  this.jMessageChenyu.login(obj).then(
+      //代码
+   )
+  this.jMessageChenyu.logout().then(
+        //代码
+  )
+  //获取用户信息
+  this.jMessageChenyu.getMyInfo().then()
+  // 此处省略很多方法... 详情对照https://github.com/jpush/jmessage-phonegap-plugin/wiki/APIs 方法名
+
+
+});
+</code></pre><p>  }</p>
+<h2 id=""><a href="#" class="headerlink" title="}"></a>}</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
     
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">}</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
 </body>
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>

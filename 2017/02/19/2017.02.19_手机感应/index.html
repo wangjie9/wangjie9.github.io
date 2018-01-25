@@ -30,7 +30,7 @@ onS,">
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">surfaceCreated方法报setParameters failed错解决办法</h3>
+    <h3 class="subtitle">手机感应器，方向东南西北指南针，前后左右旋转角度。</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -47,44 +47,31 @@ onS,">
     <div class="section">
         <div class="article">
     <div class="main">
-        <h1 class="title">surfaceCreated方法报setParameters failed错解决办法</h1>
+        <h1 class="title">手机感应器，方向东南西北指南针，前后左右旋转角度。</h1>
         <div class="stuff">
-            <span>十二月 30, 2015</span>
+            <span>二月 19, 2017</span>
             
   <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Android/">Android</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <p>public void surfaceCreated(SurfaceHolder holder){</p>
-<p>surfaceHolder = holder<br>        Log.d(TAG, “surfaceCreated” + mCamera);</p>
-<pre><code>try {
-    CamcorderProfile profile ;
-
-    int numCameras = Camera.getNumberOfCameras();
-    if (numCameras &gt; 1) {
-    profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_FRONT,CamcorderProfile.QUALITY_HIGH));
-    }
-    else{
-
-        profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_BACK,CamcorderProfile.QUALITY_HIGH));
-    }
-
-//设置camera预览的角度，因为默认图片是倾斜90度的 ??
-camera.setDisplayOrientation(90);?
-    Camera.Parameters parameters = mCamera.getParameters();
-    parameters.setPreviewSize(profile.videoFrameWidth, profile.videoFrameHeight);
-    mCamera.setParameters(parameters);
-    mCamera.setPreviewDisplay(holder);
-    mCamera.startPreview();
-}
-catch (IOException e) {
-
-}}
-</code></pre><hr>
-<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+            <p>手机传感器，方位东南西北，手机前后抬起角度，左右抬起角度。</p>
+<p>首先实现SensorEventListener类，必须继承俩个方法，onAccuracyChanged（此方法不用管因为参数会一直随着手机改变）和onSensorChanged（这里面获取数据）。</p>
+<p>@Override<br>public void onAccuracyChanged(Sensor sensor, int accuracy) {   </p>
+<p>}<br>@Override<br>public void onSensorChanged(SensorEvent event) {<br>// 方向传感器提供三个数据，分别为azimuth、pitch和roll。<br>// event.values[0]  azimuth：方位，返回水平时磁北极和Y轴的夹角，范围为0°至360°。<br>// 0°=北，90°=东，180°=南，270°=西。   </p>
+<p>// event.values[1] pitch：y轴和水平面的夹角，范围为-180°至180°。   。<br>//手机放在桌面角度为0，然后前端或后端开始抬起，值会改变</p>
+<p>// event.values[2] roll：x轴和水平面的夹角，由于历史原因，范围为-90°至90°。<br>//手机放在桌面角度为0，然后左边或右边开始抬起值会改变</p>
+<p>//手机方位，东南西北<br>double azimuth = event.values[0];<br>//手机前后翻转角度<br>double pitch = event.values[1];<br>//手机左右翻转角度<br>double roll = event.values[2];<br>}<br>}  </p>
+<p>然后再onCreate方法里面初始化注册传感器</p>
+<p>private SensorManager sensorManager = null;<br>private Sensor gyroSensor = null; </p>
+<p>//初始化注册手机传感器<br>sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);<br>gyroSensor = sensorManager<br>.getDefaultSensor(Sensor.TYPE_ORIENTATION);  </p>
+<p>这样就可以获取到了。</p>
+<p>当然在onPause里面要解除监听状态</p>
+<p>sensorManager.unregisterListener(this); // 解除监听器注册   </p>
+<p>在onResume里面要重新注册 </p>
+<p>sensorManager.registerListener(this, gyroSensor,<br>SensorManager.SENSOR_DELAY_NORMAL); //为传感器注册监听器   </p>
+<h2 id="这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。"><a href="#这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。" class="headerlink" title="这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。"></a>这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -99,7 +86,7 @@ catch (IOException e) {
     </div>
     
         <div class="side">
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。"><span class="toc-number">1.</span> <span class="toc-text">这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。</span></a></li></ol>
         </div>
     
 </div>
