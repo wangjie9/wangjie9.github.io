@@ -55,10 +55,10 @@
         </div>
         <div class="content markdown">
             <p>   此服务可以截取手机app上面的通知悬浮框内容</p>
-<p>  1:新建一个服务MessageNotificationService实现 NotificationListenerService<br>    public class MessageNotificationService extends NotificationListenerService {</p>
-<pre><code>@Override
+<p>  1:新建一个服务MessageNotificationService实现 NotificationListenerService</p>
+<pre><code>public class MessageNotificationService extends NotificationListenerService {
+@Override
 public void onNotificationPosted(final StatusBarNotification sbn) {
-
     final Notification mNotification = sbn.getNotification();
     if (mNotification != null) {
       Log.e(&quot;返回通知发起的时间=&quot;, sbn.getPostTime()+&quot;&quot;);
@@ -73,9 +73,18 @@ public void onNotificationRemoved(StatusBarNotification sbn) {
     Log.e(&quot;--------------&quot;,&quot;--------------------------&quot;);
 }
 </code></pre><p>}</p>
-<p>  2:AndroidMainifest.xml中配置<br>       <service android:name="com.app.otcpay.service.MessageNotificationService" android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"><br>            <intent-filter><br>                <action android:name="android.service.notification.NotificationListenerService"><br>                </action><br>            </intent-filter><br>        </service></p>
-<p>  3：  #获取手机通知服务,要打开app对应得”通知使用权”<br>      // 跳转到通知使用权<br>   Intent intent = new Intent(“android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS”);</p>
-<h2 id="startActivity-intent"><a href="#startActivity-intent" class="headerlink" title="   startActivity(intent);"></a>   startActivity(intent);</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+<p>  2:  AndroidMainifest.xml中配置</p>
+<pre><code>&lt;service
+     android:name=&quot;xx.xx.xx.service.MessageNotificationService&quot;
+     android:permission=&quot;android.permission.BIND_NOTIFICATION_LISTENER_SERVICE&quot; &gt;
+     &lt;intent-filter&gt;
+         &lt;action android:name=&quot;android.service.notification.NotificationListenerService&quot;&gt;
+         &lt;/action&gt;
+     &lt;/intent-filter&gt;
+ &lt;/service&gt;
+</code></pre><p>  3：     获取手机通知服务,要打开app对应得”通知使用权”<br>     // 跳转到通知使用权<br>     Intent intent = new Intent(“android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS”);<br>     startActivity(intent);</p>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -90,7 +99,7 @@ public void onNotificationRemoved(StatusBarNotification sbn) {
     </div>
     
         <div class="side">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#startActivity-intent"><span class="toc-number">1.</span> <span class="toc-text">   startActivity(intent);</span></a></li></ol>
+            
         </div>
     
 </div>
