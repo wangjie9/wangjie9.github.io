@@ -28,7 +28,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">Handler中显示Toast的问题</h3>
+    <h3 class="subtitle">NotificationListenerService截取通知</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -45,19 +45,37 @@
     <div class="section">
         <div class="article">
     <div class="main">
-        <h1 class="title">Handler中显示Toast的问题</h1>
+        <h1 class="title">NotificationListenerService截取通知</h1>
         <div class="stuff">
-            <span>五月 01, 2016</span>
+            <span>十二月 14, 2018</span>
             
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Android/">Android</a></li></ul>
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/android/">android</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <p>大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：</p>
-<p>puiblic static Context mContext;</p>
-<p>然后在onCreate方法中调用 ?mContext = getApplicationContext();</p>
-<h2 id="mContext就是上下文。"><a href="#mContext就是上下文。" class="headerlink" title="mContext就是上下文。"></a>mContext就是上下文。</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+            <p>   此服务可以截取手机app上面的通知悬浮框内容</p>
+<p>  1:新建一个服务MessageNotificationService实现 NotificationListenerService<br>    public class MessageNotificationService extends NotificationListenerService {</p>
+<pre><code>@Override
+public void onNotificationPosted(final StatusBarNotification sbn) {
+
+    final Notification mNotification = sbn.getNotification();
+    if (mNotification != null) {
+      Log.e(&quot;返回通知发起的时间=&quot;, sbn.getPostTime()+&quot;&quot;);
+      Log.e(&quot;发送通知的包名=&quot;,sbn.getPackageName()+&quot;&quot;);
+      Log.e(&quot;通知内容=&quot;,mNotification.tickerText+&quot;&quot;);
+
+}
+
+@Override
+public void onNotificationRemoved(StatusBarNotification sbn) {
+    // TODO 自动生成的方法存根
+    Log.e(&quot;--------------&quot;,&quot;--------------------------&quot;);
+}
+</code></pre><p>}</p>
+<p>  2:AndroidMainifest.xml中配置<br>       <service android:name="com.app.otcpay.service.MessageNotificationService" android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"><br>            <intent-filter><br>                <action android:name="android.service.notification.NotificationListenerService"><br>                </action><br>            </intent-filter><br>        </service></p>
+<p>  3：  #获取手机通知服务,要打开app对应得”通知使用权”<br>      // 跳转到通知使用权<br>   Intent intent = new Intent(“android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS”);</p>
+<h2 id="startActivity-intent"><a href="#startActivity-intent" class="headerlink" title="   startActivity(intent);"></a>   startActivity(intent);</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -72,7 +90,7 @@
     </div>
     
         <div class="side">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mContext就是上下文。"><span class="toc-number">1.</span> <span class="toc-text">mContext就是上下文。</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#startActivity-intent"><span class="toc-number">1.</span> <span class="toc-text">   startActivity(intent);</span></a></li></ol>
         </div>
     
 </div>
