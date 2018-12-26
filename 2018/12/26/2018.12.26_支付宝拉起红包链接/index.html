@@ -27,7 +27,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">surfaceCreated方法报setParameters failed错解决办法</h3>
+    <h3 class="subtitle">支付宝自动跳转到搜索红包地址</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -44,44 +44,17 @@
     <div class="section">
         <div class="article">
     <div class="main">
-        <h1 class="title">surfaceCreated方法报setParameters failed错解决办法</h1>
+        <h1 class="title">支付宝自动跳转到搜索红包地址</h1>
         <div class="stuff">
-            <span>十二月 30, 2015</span>
+            <span>十二月 26, 2018</span>
             
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Android/">Android</a></li></ul>
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/android/">android</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <p>public void surfaceCreated(SurfaceHolder holder){</p>
-<p>surfaceHolder = holder<br>        Log.d(TAG, “surfaceCreated” + mCamera);</p>
-<pre><code>try {
-    CamcorderProfile profile ;
-
-    int numCameras = Camera.getNumberOfCameras();
-    if (numCameras &gt; 1) {
-    profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_FRONT,CamcorderProfile.QUALITY_HIGH));
-    }
-    else{
-
-        profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_BACK,CamcorderProfile.QUALITY_HIGH));
-    }
-
-//设置camera预览的角度，因为默认图片是倾斜90度的 ??
-camera.setDisplayOrientation(90);?
-    Camera.Parameters parameters = mCamera.getParameters();
-    parameters.setPreviewSize(profile.videoFrameWidth, profile.videoFrameHeight);
-    mCamera.setParameters(parameters);
-    mCamera.setPreviewDisplay(holder);
-    mCamera.startPreview();
-}
-catch (IOException e) {
-
-}}
-</code></pre><hr>
-<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+            <p>alipays://platformapi/startapp?requestType=hotword_b&amp;appId=20001003&amp;keyword=620066600</p>
+<h2 id="img-hongbao-jpg"><a href="#img-hongbao-jpg" class="headerlink" title="/img/hongbao.jpg"></a>/img/hongbao.jpg</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -96,7 +69,7 @@ catch (IOException e) {
     </div>
     
         <div class="side">
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#img-hongbao-jpg"><span class="toc-number">1.</span> <span class="toc-text">/img/hongbao.jpg</span></a></li></ol>
         </div>
     
 </div>
