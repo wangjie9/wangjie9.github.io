@@ -27,7 +27,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">surfaceCreated方法报setParameters failed错解决办法</h3>
+    <h3 class="subtitle">抓取手机状态栏所有通知消息</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -44,42 +44,24 @@
     <div class="section">
         <div class="article">
     <div class="main">
-        <h1 class="title">surfaceCreated方法报setParameters failed错解决办法</h1>
+        <h1 class="title">抓取手机状态栏所有通知消息</h1>
         <div class="stuff">
-            <span>十二月 30, 2015</span>
+            <span>十二月 26, 2018</span>
             
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Android/">Android</a></li></ul>
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/android/">android</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <p>public void surfaceCreated(SurfaceHolder holder){</p>
-<p>surfaceHolder = holder<br>        Log.d(TAG, “surfaceCreated” + mCamera);</p>
-<pre><code>try {
-    CamcorderProfile profile ;
-
-    int numCameras = Camera.getNumberOfCameras();
-    if (numCameras &gt; 1) {
-    profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_FRONT,CamcorderProfile.QUALITY_HIGH));
-    }
-    else{
-
-        profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_BACK,CamcorderProfile.QUALITY_HIGH));
-    }
-
-//设置camera预览的角度，因为默认图片是倾斜90度的 ??
-camera.setDisplayOrientation(90);?
-    Camera.Parameters parameters = mCamera.getParameters();
-    parameters.setPreviewSize(profile.videoFrameWidth, profile.videoFrameHeight);
-    mCamera.setParameters(parameters);
-    mCamera.setPreviewDisplay(holder);
-    mCamera.startPreview();
-}
-catch (IOException e) {
-
-}}
+            <pre><code>在NotificationListenerService中使用
+  StatusBarNotification[] statusBarNotifications = getActiveNotifications();
+            for(StatusBarNotification statusBarNotification : statusBarNotifications) {
+                Bundle extras2 = statusBarNotification.getNotification().extras;
+                String title = extras2.getCharSequence(Notification.EXTRA_TITLE)+&quot;--标题&quot;;
+                String text = extras2.getCharSequence(Notification.EXTRA_TEXT)+&quot;--通知内容&quot;;
+                String packageName = statusBarNotification.getPackageName()+&quot;--包名&quot;;//包名字
+                long time = statusBarNotification.getPostTime();//时间
+        }
 </code></pre><hr>
 <p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 
