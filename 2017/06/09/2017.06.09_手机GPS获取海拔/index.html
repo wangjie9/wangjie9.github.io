@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>手机GPS获取海拔 | Jie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="首先GPS在室内是没有信号的，所以只能在室外或者窗口获取到海拔等一系列数据。 java代码如下 package com.example.altitudeproject; import android.app.Activity;import android.content.Context;import android.location.Criteria;import android.location">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手机GPS获取海拔">
+<meta property="og:url" content="http://yoursite.com/2017/06/09/2017.06.09_手机GPS获取海拔/index.html">
+<meta property="og:site_name" content="Jie">
+<meta property="og:description" content="首先GPS在室内是没有信号的，所以只能在室外或者窗口获取到海拔等一系列数据。 java代码如下 package com.example.altitudeproject; import android.app.Activity;import android.content.Context;import android.location.Criteria;import android.location">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-06-09T03:47:13.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手机GPS获取海拔">
+<meta name="twitter:description" content="首先GPS在室内是没有信号的，所以只能在室外或者窗口获取到海拔等一系列数据。 java代码如下 package com.example.altitudeproject; import android.app.Activity;import android.content.Context;import android.location.Criteria;import android.location">
+  
+    <link rel="alternate" href="/atom.xml" title="Jie" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jie</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017.06.09_手机GPS获取海拔" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/09/2017.06.09_手机GPS获取海拔/" class="article-date">
+  <time datetime="2017-06-09T03:44:40.587Z" itemprop="datePublished">2017-06-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      手机GPS获取海拔
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先GPS在室内是没有信号的，所以只能在室外或者窗口获取到海拔等一系列数据。</p>
+<p>java代码如下</p>
+<p>package com.example.altitudeproject;</p>
+<p>import android.app.Activity;<br>import android.content.Context;<br>import android.location.Criteria;<br>import android.location.Location;<br>import android.location.LocationListener;<br>import android.location.LocationManager;<br>import android.os.Bundle;<br>import android.util.Log;<br>import android.view.View;<br>import android.widget.Button;<br>import android.widget.TextView;   </p>
+<p>public class MainActivity extends Activity {   </p>
+<pre><code>TextView tv1;   
+Location location;   
+
+@Override  
+public void onCreate(Bundle savedInstanceState) {   
+    super.onCreate(savedInstanceState);   
+    setContentView(R.layout.activity_main);  
+
+    // 定义UI组件   
+    Button b1 = (Button) findViewById(R.id.bt_button1);   
+    tv1 = (TextView) findViewById(R.id.tv_textview1);   
+
+    // 获取LocationManager对象   
+    LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);   
+
+    // 定义Criteria对象   
+    Criteria criteria = new Criteria();   
+    // 设置定位精确度 Criteria.ACCURACY_COARSE 比较粗略， Criteria.ACCURACY_FINE则比较精细   
+    criteria.setAccuracy(Criteria.ACCURACY_FINE);   
+    // 设置是否需要海拔信息 Altitude   
+    criteria.setAltitudeRequired(true);   
+    // 设置是否需要方位信息 Bearing   
+    criteria.setBearingRequired(true);   
+    // 设置是否允许运营商收费   
+    criteria.setCostAllowed(true);   
+    // 设置对电源的需求   
+    criteria.setPowerRequirement(Criteria.POWER_LOW);   
+
+    // 获取GPS信息提供者   
+    String bestProvider = lm.getBestProvider(criteria, true);   
+
+    // 获取定位信息   
+    location = lm.getLastKnownLocation(bestProvider);   
+
+    // 给按钮绑定点击监听器   
+    b1.setOnClickListener(new View.OnClickListener() {   
+        @Override  
+        public void onClick(View v) {   
+            updateLocation(location);   
+        }   
+    });   
+
+    // 位置监听器   
+    LocationListener locationListener = new LocationListener() {   
+
+        // 当位置改变时触发   
+        @Override  
+        public void onLocationChanged(Location location) {   
+            Log.i(&quot;onLocationChanged&quot;, location.toString());   
+            updateLocation(location);   
+        }   
+
+        // Provider失效时触发   
+        @Override  
+        public void onProviderDisabled(String arg0) {   
+            Log.i(&quot;yao&quot;, arg0);   
+
+        }   
+
+        // Provider可用时触发   
+        @Override  
+        public void onProviderEnabled(String arg0) {   
+            Log.i(&quot;onProviderEnabled&quot;, arg0);   
+        }   
+
+        // Provider状态改变时触发   
+        @Override  
+        public void onStatusChanged(String arg0, int arg1, Bundle arg2) {   
+            Log.i(&quot;onStatusChanged&quot;, &quot;onStatusChanged&quot;);   
+        }   
+    };   
+
+    // 500毫秒更新一次，忽略位置变化   
+    lm.requestLocationUpdates(bestProvider, 500, 0, locationListener);   
+
+}   
+
+// 更新位置信息   
+private void updateLocation(Location location) {   
+    if (location != null) {   
+        tv1.setText(&quot;定位信息如下：&quot; + location.toString()+&quot;\n\t海拔:&quot;+location.getAltitude() +&quot;\n\t方向:&quot;+location.getBearing()+ &quot;\n\t经度：&quot; + location.getLongitude() + &quot;\n\t纬度：&quot;  
+                + location.getLatitude()+&quot;\n\t提供商：&quot;+location.getProvider()+&quot;\n\t速度：&quot;+location.getSpeed()+&quot;\n\t时间：&quot;+location.getTime());   
+    } else {   
+        Log.i(&quot;updateLocation&quot;, &quot;没有获取到定位对象Location&quot;);   
+    }   
+}   
+</code></pre><p>}  </p>
+<p>xml代码如下：</p>
+<relativelayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context="${relativePackage}.${activityClass}"><br><br><br>     <button android:id="@+id/bt_button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="获取海拔"><br><br>    <textview android:id="@+id/tv_textview1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="具体信息" android:layout_below="@id/bt_button1"><br><br><br></textview></button></relativelayout>
+
+
+
+<p>AndroidManifest.xml中需要配置权限：</p>
+<p><uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission></p>
+<p><uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission></p>
+<p><uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"></uses-permission></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><uses-permission android:name="android.permission.INTERNET"></uses-permission></h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/09/2017.06.09_手机GPS获取海拔/" data-id="ck3ie6t41000a90u9rvogopnk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/09/2017.06.09_ionic2微信支付,分享,登录/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ionic2微信支付,分享,登录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/19/2017.02.19_手机感应/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">手机感应器，方向东南西北指南针，前后左右旋转角度。</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/02/2019.03.02_virtuaxposed打不开自己应用原因/">VirtuaXposed 打不开自己应用原因</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/04/2019.01.04_直接跳转到支付宝转账付款各种链接/">直接跳转到支付宝进行付款和转账链接</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/">抓取手机状态栏所有通知消息</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/26/2018.12.26_支付宝拉起红包链接/">支付宝自动跳转到搜索红包地址</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/14/2018.12.14_AccessibilityService模拟点击&获取页面内容/">AccessibilityService模拟点击&amp;获取页面内容</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

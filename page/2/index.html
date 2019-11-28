@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Jie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Jie">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Jie">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jie">
+  
+    <link rel="alternate" href="/atom.xml" title="Jie" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jie</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2017.02.19_手机感应" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/19/2017.02.19_手机感应/" class="article-date">
+  <time datetime="2017-02-19T03:43:49.908Z" itemprop="datePublished">2017-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/19/2017.02.19_手机感应/">手机感应器，方向东南西北指南针，前后左右旋转角度。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>手机传感器，方位东南西北，手机前后抬起角度，左右抬起角度。</p>
+<p>首先实现SensorEventListener类，必须继承俩个方法，onAccuracyChanged（此方法不用管因为参数会一直随着手机改变）和onSensorChanged（这里面获取数据）。</p>
+<p>@Override<br>public void onAccuracyChanged(Sensor sensor, int accuracy) {   </p>
+<p>}<br>@Override<br>public void onSensorChanged(SensorEvent event) {<br>// 方向传感器提供三个数据，分别为azimuth、pitch和roll。<br>// event.values[0]  azimuth：方位，返回水平时磁北极和Y轴的夹角，范围为0°至360°。<br>// 0°=北，90°=东，180°=南，270°=西。   </p>
+<p>// event.values[1] pitch：y轴和水平面的夹角，范围为-180°至180°。   。<br>//手机放在桌面角度为0，然后前端或后端开始抬起，值会改变</p>
+<p>// event.values[2] roll：x轴和水平面的夹角，由于历史原因，范围为-90°至90°。<br>//手机放在桌面角度为0，然后左边或右边开始抬起值会改变</p>
+<p>//手机方位，东南西北<br>double azimuth = event.values[0];<br>//手机前后翻转角度<br>double pitch = event.values[1];<br>//手机左右翻转角度<br>double roll = event.values[2];<br>}<br>}  </p>
+<p>然后再onCreate方法里面初始化注册传感器</p>
+<p>private SensorManager sensorManager = null;<br>private Sensor gyroSensor = null; </p>
+<p>//初始化注册手机传感器<br>sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);<br>gyroSensor = sensorManager<br>.getDefaultSensor(Sensor.TYPE_ORIENTATION);  </p>
+<p>这样就可以获取到了。</p>
+<p>当然在onPause里面要解除监听状态</p>
+<p>sensorManager.unregisterListener(this); // 解除监听器注册   </p>
+<p>在onResume里面要重新注册 </p>
+<p>sensorManager.registerListener(this, gyroSensor,<br>SensorManager.SENSOR_DELAY_NORMAL); //为传感器注册监听器   </p>
+<h2 id="这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。"><a href="#这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。" class="headerlink" title="这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。"></a>这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/19/2017.02.19_手机感应/" data-id="ck3ie6t3x000590u95jkyfovd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016.10.15_viewpage" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/15/2016.10.15_viewpage/" class="article-date">
+  <time datetime="2016-11-15T03:34:17.071Z" itemprop="datePublished">2016-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/15/2016.10.15_viewpage/">自定义不预加载viewpager</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>直接把这个工具类拷贝到项目包下，然后引用这个MyViewPager就可以实现不预加载</p>
+<p>下载地址如下</p>
+<p>&lt;com.example.photoutil.MyViewPager</p>
+<pre><code>android:id=&quot;@+id/image&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot; &gt;
+</code></pre><p> &lt;/com.example.photoutil.MyViewPager&gt;</p>
+<h2 id="http-pan-baidu-com-s-1i4PlQtB"><a href="#http-pan-baidu-com-s-1i4PlQtB" class="headerlink" title="http://pan.baidu.com/s/1i4PlQtB"></a><a href="http://pan.baidu.com/s/1i4PlQtB" target="_blank" rel="noopener">http://pan.baidu.com/s/1i4PlQtB</a></h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/15/2016.10.15_viewpage/" data-id="ck3ie6t3w000490u9sybtcph7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016.10.04_android自定义相机" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/04/2016.10.04_android自定义相机/" class="article-date">
+  <time datetime="2016-10-04T03:22:03.395Z" itemprop="datePublished">2016-10-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/04/2016.10.04_android自定义相机/">android自定义相机 前置摄像头拍照，照片旋转180</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>//前置摄像头预览旋180度</p>
+<p>myCamera = Camera.open();</p>
+<p>myCamera .setDisplayOrientation(180);<br>//保存图片旋转180度解决方法<br>params.set(“orientation”, “portrait”);</p>
+<h2 id="params-set-“rotation”-180"><a href="#params-set-“rotation”-180" class="headerlink" title="params.set(“rotation”, 180);"></a>params.set(“rotation”, 180);</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/04/2016.10.04_android自定义相机/" data-id="ck3ie6t3v000390u9mc1pszyr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2015.6.10_toast" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/01/2015.6.10_toast/" class="article-date">
+  <time datetime="2016-05-01T10:04:11.695Z" itemprop="datePublished">2016-05-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/01/2015.6.10_toast/">Handler中显示Toast的问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：</p>
+<p>puiblic static Context mContext;</p>
+<p>然后在onCreate方法中调用 ?mContext = getApplicationContext();</p>
+<h2 id="mContext就是上下文。"><a href="#mContext就是上下文。" class="headerlink" title="mContext就是上下文。"></a>mContext就是上下文。</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/01/2015.6.10_toast/" data-id="ck3ie6t3s000190u9eb6peku2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2015.12.30_surfaceCreated" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/30/2015.12.30_surfaceCreated/" class="article-date">
+  <time datetime="2015-12-30T02:02:55.374Z" itemprop="datePublished">2015-12-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/30/2015.12.30_surfaceCreated/">surfaceCreated方法报setParameters failed错解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>public void surfaceCreated(SurfaceHolder holder){</p>
+<p>surfaceHolder = holder<br>        Log.d(TAG, “surfaceCreated” + mCamera);</p>
+<pre><code>try {
+    CamcorderProfile profile ;
+
+    int numCameras = Camera.getNumberOfCameras();
+    if (numCameras &gt; 1) {
+    profile = (CamcorderProfile
+                .get(Camera.CameraInfo.CAMERA_FACING_FRONT,CamcorderProfile.QUALITY_HIGH));
+    }
+    else{
+
+        profile = (CamcorderProfile
+                .get(Camera.CameraInfo.CAMERA_FACING_BACK,CamcorderProfile.QUALITY_HIGH));
+    }
+
+//设置camera预览的角度，因为默认图片是倾斜90度的 ??
+camera.setDisplayOrientation(90);?
+    Camera.Parameters parameters = mCamera.getParameters();
+    parameters.setPreviewSize(profile.videoFrameWidth, profile.videoFrameHeight);
+    mCamera.setParameters(parameters);
+    mCamera.setPreviewDisplay(holder);
+    mCamera.startPreview();
+}
+catch (IOException e) {
+
+}}
+</code></pre><hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/12/30/2015.12.30_surfaceCreated/" data-id="ck3ie6t3m000090u9gzx4wec7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/02/2019.03.02_virtuaxposed打不开自己应用原因/">VirtuaXposed 打不开自己应用原因</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/04/2019.01.04_直接跳转到支付宝转账付款各种链接/">直接跳转到支付宝进行付款和转账链接</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/">抓取手机状态栏所有通知消息</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/26/2018.12.26_支付宝拉起红包链接/">支付宝自动跳转到搜索红包地址</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/14/2018.12.14_AccessibilityService模拟点击&获取页面内容/">AccessibilityService模拟点击&amp;获取页面内容</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

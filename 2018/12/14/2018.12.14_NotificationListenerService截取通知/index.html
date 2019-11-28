@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>NotificationListenerService截取通知 | Jie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="此服务可以截取手机app上面的通知悬浮框内容   1:新建一个服务MessageNotificationService实现 NotificationListenerService public class MessageNotificationService extends NotificationListenerService { @Override public void onNotif">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NotificationListenerService截取通知">
+<meta property="og:url" content="http://yoursite.com/2018/12/14/2018.12.14_NotificationListenerService截取通知/index.html">
+<meta property="og:site_name" content="Jie">
+<meta property="og:description" content="此服务可以截取手机app上面的通知悬浮框内容   1:新建一个服务MessageNotificationService实现 NotificationListenerService public class MessageNotificationService extends NotificationListenerService { @Override public void onNotif">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-14T08:26:24.100Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NotificationListenerService截取通知">
+<meta name="twitter:description" content="此服务可以截取手机app上面的通知悬浮框内容   1:新建一个服务MessageNotificationService实现 NotificationListenerService public class MessageNotificationService extends NotificationListenerService { @Override public void onNotif">
+  
+    <link rel="alternate" href="/atom.xml" title="Jie" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jie</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2018.12.14_NotificationListenerService截取通知" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/14/2018.12.14_NotificationListenerService截取通知/" class="article-date">
+  <time datetime="2018-12-14T07:58:26.956Z" itemprop="datePublished">2018-12-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NotificationListenerService截取通知
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   此服务可以截取手机app上面的通知悬浮框内容</p>
+<p>  1:新建一个服务MessageNotificationService实现 NotificationListenerService</p>
+<pre><code>public class MessageNotificationService extends NotificationListenerService {
+@Override
+public void onNotificationPosted(final StatusBarNotification sbn) {
+    final Notification mNotification = sbn.getNotification();
+    if (mNotification != null) {
+      Log.e(&quot;返回通知发起的时间=&quot;, sbn.getPostTime()+&quot;&quot;);
+      Log.e(&quot;发送通知的包名=&quot;,sbn.getPackageName()+&quot;&quot;);
+      Log.e(&quot;通知内容=&quot;,mNotification.tickerText+&quot;&quot;);
+
+}
+
+@Override
+public void onNotificationRemoved(StatusBarNotification sbn) {
+    // TODO 自动生成的方法存根
+    Log.e(&quot;--------------&quot;,&quot;--------------------------&quot;);
+}
+</code></pre><p>}</p>
+<p>  2:  AndroidMainifest.xml中配置</p>
+<pre><code>&lt;service
+     android:name=&quot;xx.xx.xx.service.MessageNotificationService&quot;
+     android:permission=&quot;android.permission.BIND_NOTIFICATION_LISTENER_SERVICE&quot; &gt;
+     &lt;intent-filter&gt;
+         &lt;action android:name=&quot;android.service.notification.NotificationListenerService&quot;&gt;
+         &lt;/action&gt;
+     &lt;/intent-filter&gt;
+ &lt;/service&gt;
+</code></pre><p>  3：     获取手机通知服务,要打开app对应得”通知使用权”<br>     // 跳转到通知使用权<br>     Intent intent = new Intent(“android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS”);<br>     startActivity(intent);</p>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/14/2018.12.14_NotificationListenerService截取通知/" data-id="ck3ie6t46000i90u9ia3x6yc3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/14/2018.12.14_AccessibilityService模拟点击&获取页面内容/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          AccessibilityService模拟点击&amp;获取页面内容
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/25/2018.01.25_Activity生命周期/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Activity生命周期各方法中合理调用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/02/2019.03.02_virtuaxposed打不开自己应用原因/">VirtuaXposed 打不开自己应用原因</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/04/2019.01.04_直接跳转到支付宝转账付款各种链接/">直接跳转到支付宝进行付款和转账链接</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/">抓取手机状态栏所有通知消息</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/26/2018.12.26_支付宝拉起红包链接/">支付宝自动跳转到搜索红包地址</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/14/2018.12.14_AccessibilityService模拟点击&获取页面内容/">AccessibilityService模拟点击&amp;获取页面内容</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
