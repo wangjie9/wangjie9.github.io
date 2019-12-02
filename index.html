@@ -28,6 +28,8 @@
   
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
 </head>
 </html>
 <body>
@@ -57,7 +59,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/29/2019.11.29/">播放音乐</a>
+      <a class="article-title" href="/2019/11/29/2019.11.29/">听一曲&lt;&lt;从前&gt;&gt;</a>
     </h1>
   
 
@@ -78,7 +80,28 @@
     
     <div class="article-content article-content-cloud" itemprop="articleBody">
       
-        <hr>
+        
+        <div id="aplayer-KsWNavwF" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-KsWNavwF"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "从前",
+              author: "Jie",
+              url: "https://6170-aprogram-base64-1256793383.tcb.qcloud.la/git/congqian.flac?sign=4abfbe5f77471129aca76633da2f22bf&t=1575025198",
+              pic: "https://6170-aprogram-base64-1256793383.tcb.qcloud.la/git/default-avatar.webp?sign=b43b1203c308a61c0ab4b06a28fcc017&t=1575025067",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+<hr>
 <p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 
       
@@ -946,7 +969,7 @@ share(){
       <ul>
         
           <li>
-            <a href="/2019/11/29/2019.11.29/">播放音乐</a>
+            <a href="/2019/11/29/2019.11.29/">听一曲&lt;&lt;从前&gt;&gt;</a>
           </li>
         
           <li>
