@@ -3,10 +3,9 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-
-  
   <title>Jie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
   
   
   
@@ -20,420 +19,571 @@
   
     <link rel="alternate" href="/atom.xml" title="Jie" type="application/atom+xml">
   
+
   
-    <link rel="icon" href="/images/default-avatar.jpg">
-  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/home.css">
+  
+
+  
+
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
 </head>
 </html>
-<body>
-  <div id="fullpage" class="mobile-nav-right">
+
+
+  <body>
+
+
+  
+    <header id="header">
+
+	<!-- 背景图模式 -->
+	
+
     
-      <div id="wrapper" title="图片来自网络">
+      <div id="intrologo" class="intro-logo" style="background-position:center; background-repeat:no-repeat; background-image: url(); background-size: auto 100%;">
+
+      <!-- Support rolling -->  
+        
+        <section class="awSlider">
+          <div class="carousel slide carousel-fade " data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+               
+                  
+                    <div class="item active">
+                  
+                    <img id="carousel-img0" src="/css/images/home-bg.jpg">
+                  </div>
+
+                  <!-- 自适应大图 -->
+                  <script>
+                      var img0 = new Image();
+                      var imageTag0 = document.getElementById("carousel-img0");
+                      img0.src = imageTag0.src;
+                      img0.onload=function(){
+                        if (img0.width / img0.height <= document.body.clientWidth / document.body.clientHeight) {
+                          imageTag0.style.width = document.body.clientWidth + "px";
+                        } else {
+                          imageTag0.style.height = document.body.clientHeight + "px";
+                          imageTag0.style.marginLeft = -(document.body.clientHeight * img0.width / img0.height - document.body.clientWidth) / 2 + "px";
+                        }
+                      };
+                  </script>
+                
+                  
+                    <div class="item">
+                  
+                    <img id="carousel-img1" src="/css/images/sample.jpg">
+                  </div>
+
+                  <!-- 自适应大图 -->
+                  <script>
+                      var img1 = new Image();
+                      var imageTag1 = document.getElementById("carousel-img1");
+                      img1.src = imageTag1.src;
+                      img1.onload=function(){
+                        if (img1.width / img1.height <= document.body.clientWidth / document.body.clientHeight) {
+                          imageTag1.style.width = document.body.clientWidth + "px";
+                        } else {
+                          imageTag1.style.height = document.body.clientHeight + "px";
+                          imageTag1.style.marginLeft = -(document.body.clientHeight * img1.width / img1.height - document.body.clientWidth) / 2 + "px";
+                        }
+                      };
+                  </script>
+                
+                  
+                    <div class="item">
+                  
+                    <img id="carousel-img2" src="https://source.unsplash.com/collection/954550/1920x1080">
+                  </div>
+
+                  <!-- 自适应大图 -->
+                  <script>
+                      var img2 = new Image();
+                      var imageTag2 = document.getElementById("carousel-img2");
+                      img2.src = imageTag2.src;
+                      img2.onload=function(){
+                        if (img2.width / img2.height <= document.body.clientWidth / document.body.clientHeight) {
+                          imageTag2.style.width = document.body.clientWidth + "px";
+                        } else {
+                          imageTag2.style.height = document.body.clientHeight + "px";
+                          imageTag2.style.marginLeft = -(document.body.clientHeight * img2.width / img2.height - document.body.clientWidth) / 2 + "px";
+                        }
+                      };
+                  </script>
+                
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href=".carousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Geri</span>
+            </a>
+            <a class="right carousel-control" href=".carousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">İleri</span>
+            </a>
+          </div>
+        </section>
+        <script>
+          $('section.awSlider .carousel').carousel({
+              pause: '',
+              interval: 5000
+          });
+          var startImage = $('section.awSlider .item.active > img').attr('src');
+          $('section.awSlider .carousel').on('slid.bs.carousel', function () {
+              var bscn = $(this).find('.item.active > img').attr('src');
+              $('section.awSlider > img').attr('src', bscn);
+          });
+        </script>
+      
+
     
+ 
+
+
+    <canvas width="100%" height="100%"></canvas>
+    <script>
+      var c = document.getElementsByTagName('canvas')[0],
+          x = c.getContext('2d'),
+          w = window.innerWidth,
+          h = window.innerHeight,
+          pr = window.devicePixelRatio || 1,
+          f = 90,
+          q,
+          m = Math,
+          r = 0,
+          u = m.PI*2,
+          v = m.cos,
+          z = m.random
+      c.width = w*pr
+      c.height = h*pr
+      x.scale(pr, pr)
+      x.globalAlpha = 0.6
+
+      <!-- 折线Polyline背景 -->
+      
+    </script>
     
-      <header id="header">
-  <div id="nav-toggle" class="nav-toggle"></div>
-  <div class="head-box global-width">
-    <nav class="nav-box nav-right">
-      
-        <a class="nav-item" href="/" title="">首页</a>
-      
-        <a class="nav-item" href="/archives" title="">归档</a>
-      
-    </nav>
+
+    
+      <div id="homelogo" class="homelogo" style="background: rgba(255,255,255,1);"> 
+    
+
+        
+          <div class="homelogoback" style="border: 1px solid #404040;">
+            <h1><a href="#content" id="logo">Jie</a></h1>
+            <h3></h3>
+            <h5>John Doe</h5>
+            <!-- <p><a href="https://github.com/iTimeTraveler" target="_blank">Github</a></p> -->
+          </div>
+        
+    
+    </div>
   </div>
+
+  <!-- 自适应主页背景大图 -->
+  
+
+ <!-- home_logo_image居中 -->
+ 
+    <script>
+        var homelogodiv = document.getElementById("homelogo");
+        if (document.all.homelogo.offsetWidth > document.body.clientWidth) {
+          homelogodiv.style.width = document.body.clientWidth + "px";
+          homelogodiv.style.marginLeft = document.body.clientWidth * -0.5 + "px";
+        } else {
+          homelogodiv.style.width = homelogodiv.clientWidth  + "px";
+          homelogodiv.style.marginLeft = (homelogodiv.clientWidth)  * -0.5 + "px";
+        }
+    </script>
+  
+
+  <div class="intro-navigate">
+      <p class="navigater-list">
+        
+          <a id="beautifont" class="main-nav-link" href="/">Home</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/archives">Archives</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/categories">Categories</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/tags">Tags</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/about">About</a>
+        
+      </p>
+  </div>
+
 </header>
-      <div id="middlecontent" title class="global-width sidebar-right">
-        <section id="main">
   
-    <article id="post-2017.06.09_手机GPS获取海拔" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
-  
-    <header class="article-header">
+  <div id="container">
+    <div id="wrap">
       
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;">
   
-    <h1 itemprop="name">
+    <article id="post-2017.06.09_手机GPS获取海拔" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="/2017/06/09/2017.06.09_手机GPS获取海拔/">手机GPS获取海拔</a>
     </h1>
   
 
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2017/06/09/2017.06.09_手机GPS获取海拔/" class="article-date">
-  <time datetime="2017-06-09T03:44:40.587Z" itemprop="datePublished">2017-06-09</time>
-</a>
+      </header>
     
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-meta">
       
-        <p>首先GPS在室内是没有信号的，所以只能在室外或者窗口获取到海拔等一系列数据。</p>
-<p>java代码如下</p>
-<p>package com.example.altitudeproject;</p>
-<p>import android.app.Activity;<br>import android.content.Context;<br>import android.location.Criteria;<br>import android.location.Location;<br>import android.location.LocationListener;<br>import android.location.LocationManager;<br>import android.os.Bundle;<br>import android.util.Log;<br>import android.view.View;<br>import android.widget.Button;<br>import android.widget.TextView;   </p>
-<p>public class MainActivity extends Activity {   </p>
-<pre><code>TextView tv1;   
-Location location;   
+	<a href="/2017/06/09/2017.06.09_手机GPS获取海拔/" class="article-date">
+	  <time datetime="2017-06-09T03:44:40.587Z" itemprop="datePublished">2017-06-09</time>
+	</a>
 
-@Override  
-public void onCreate(Bundle savedInstanceState) {   
-    super.onCreate(savedInstanceState);   
-    setContentView(R.layout.activity_main);  
+      
+      
+      
 
-    // 定义UI组件   
-    Button b1 = (Button) findViewById(R.id.bt_button1);   
-    tv1 = (TextView) findViewById(R.id.tv_textview1);   
-
-    // 获取LocationManager对象   
-    LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);   
-
-    // 定义Criteria对象   
-    Criteria criteria = new Criteria();   
-    // 设置定位精确度 Criteria.ACCURACY_COARSE 比较粗略， Criteria.ACCURACY_FINE则比较精细   
-    criteria.setAccuracy(Criteria.ACCURACY_FINE);   
-    // 设置是否需要海拔信息 Altitude   
-    criteria.setAltitudeRequired(true);   
-    // 设置是否需要方位信息 Bearing   
-    criteria.setBearingRequired(true);   
-    // 设置是否允许运营商收费   
-    criteria.setCostAllowed(true);   
-    // 设置对电源的需求   
-    criteria.setPowerRequirement(Criteria.POWER_LOW);   
-
-    // 获取GPS信息提供者   
-    String bestProvider = lm.getBestProvider(criteria, true);   
-
-    // 获取定位信息   
-    location = lm.getLastKnownLocation(bestProvider);   
-
-    // 给按钮绑定点击监听器   
-    b1.setOnClickListener(new View.OnClickListener() {   
-        @Override  
-        public void onClick(View v) {   
-            updateLocation(location);   
-        }   
-    });   
-
-    // 位置监听器   
-    LocationListener locationListener = new LocationListener() {   
-
-        // 当位置改变时触发   
-        @Override  
-        public void onLocationChanged(Location location) {   
-            Log.i(&quot;onLocationChanged&quot;, location.toString());   
-            updateLocation(location);   
-        }   
-
-        // Provider失效时触发   
-        @Override  
-        public void onProviderDisabled(String arg0) {   
-            Log.i(&quot;yao&quot;, arg0);   
-
-        }   
-
-        // Provider可用时触发   
-        @Override  
-        public void onProviderEnabled(String arg0) {   
-            Log.i(&quot;onProviderEnabled&quot;, arg0);   
-        }   
-
-        // Provider状态改变时触发   
-        @Override  
-        public void onStatusChanged(String arg0, int arg1, Bundle arg2) {   
-            Log.i(&quot;onStatusChanged&quot;, &quot;onStatusChanged&quot;);   
-        }   
-    };   
-
-    // 500毫秒更新一次，忽略位置变化   
-    lm.requestLocationUpdates(bestProvider, 500, 0, locationListener);   
-
-}   
-
-// 更新位置信息   
-private void updateLocation(Location location) {   
-    if (location != null) {   
-        tv1.setText(&quot;定位信息如下：&quot; + location.toString()+&quot;\n\t海拔:&quot;+location.getAltitude() +&quot;\n\t方向:&quot;+location.getBearing()+ &quot;\n\t经度：&quot; + location.getLongitude() + &quot;\n\t纬度：&quot;  
-                + location.getLatitude()+&quot;\n\t提供商：&quot;+location.getProvider()+&quot;\n\t速度：&quot;+location.getSpeed()+&quot;\n\t时间：&quot;+location.getTime());   
-    } else {   
-        Log.i(&quot;updateLocation&quot;, &quot;没有获取到定位对象Location&quot;);   
-    }   
-}   
-</code></pre><p>}  </p>
-<p>xml代码如下：</p>
-<relativelayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context="${relativePackage}.${activityClass}"><br><br><br>     <button android:id="@+id/bt_button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="获取海拔"><br><br>    <textview android:id="@+id/tv_textview1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="具体信息" android:layout_below="@id/bt_button1"><br><br><br></textview></button></relativelayout>
-
-
-
-<p>AndroidManifest.xml中需要配置权限：</p>
-<p><uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission></p>
-<p><uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission></p>
-<p><uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"></uses-permission></p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><uses-permission android:name="android.permission.INTERNET"></uses-permission></h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          首先GPS在室内是没有信号的，所以只能在室外或者窗口获取到海拔等一系列数据。
+java代码如下
+package com.example.altitudeproject;
+import android.app.Activity;import android.content.Context;import android.location.Criteria;import android.location.Location;import android.location.LocationListe...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/06/09/2017.06.09_手机GPS获取海拔/#more">Read More</a>
+        </p>
       
     </div>
-    
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
   </div>
-  
   
 </article>
 
+<!-- Table of Contents -->
+
+
   
-    <article id="post-2017.02.19_手机感应" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-2017.02.19_手机感应" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="/2017/02/19/2017.02.19_手机感应/">手机感应器，方向东南西北指南针，前后左右旋转角度。</a>
     </h1>
   
 
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2017/02/19/2017.02.19_手机感应/" class="article-date">
-  <time datetime="2017-02-19T03:43:49.908Z" itemprop="datePublished">2017-02-19</time>
-</a>
+      </header>
     
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-meta">
       
-        <p>手机传感器，方位东南西北，手机前后抬起角度，左右抬起角度。</p>
-<p>首先实现SensorEventListener类，必须继承俩个方法，onAccuracyChanged（此方法不用管因为参数会一直随着手机改变）和onSensorChanged（这里面获取数据）。</p>
-<p>@Override<br>public void onAccuracyChanged(Sensor sensor, int accuracy) {   </p>
-<p>}<br>@Override<br>public void onSensorChanged(SensorEvent event) {<br>// 方向传感器提供三个数据，分别为azimuth、pitch和roll。<br>// event.values[0]  azimuth：方位，返回水平时磁北极和Y轴的夹角，范围为0°至360°。<br>// 0°=北，90°=东，180°=南，270°=西。   </p>
-<p>// event.values[1] pitch：y轴和水平面的夹角，范围为-180°至180°。   。<br>//手机放在桌面角度为0，然后前端或后端开始抬起，值会改变</p>
-<p>// event.values[2] roll：x轴和水平面的夹角，由于历史原因，范围为-90°至90°。<br>//手机放在桌面角度为0，然后左边或右边开始抬起值会改变</p>
-<p>//手机方位，东南西北<br>double azimuth = event.values[0];<br>//手机前后翻转角度<br>double pitch = event.values[1];<br>//手机左右翻转角度<br>double roll = event.values[2];<br>}<br>}  </p>
-<p>然后再onCreate方法里面初始化注册传感器</p>
-<p>private SensorManager sensorManager = null;<br>private Sensor gyroSensor = null; </p>
-<p>//初始化注册手机传感器<br>sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);<br>gyroSensor = sensorManager<br>.getDefaultSensor(Sensor.TYPE_ORIENTATION);  </p>
-<p>这样就可以获取到了。</p>
-<p>当然在onPause里面要解除监听状态</p>
-<p>sensorManager.unregisterListener(this); // 解除监听器注册   </p>
-<p>在onResume里面要重新注册 </p>
-<p>sensorManager.registerListener(this, gyroSensor,<br>SensorManager.SENSOR_DELAY_NORMAL); //为传感器注册监听器   </p>
-<h2 id="这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。"><a href="#这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。" class="headerlink" title="这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。"></a>这样一个完整的手机传感器3个数据就可以获取到了，希望你学到了。</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+	<a href="/2017/02/19/2017.02.19_手机感应/" class="article-date">
+	  <time datetime="2017-02-19T03:43:49.908Z" itemprop="datePublished">2017-02-19</time>
+	</a>
 
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          手机传感器，方位东南西北，手机前后抬起角度，左右抬起角度。
+首先实现SensorEventListener类，必须继承俩个方法，onAccuracyChanged（此方法不用管因为参数会一直随着手机改变）和onSensorChanged（这里面获取数据）。
+@Overridepublic void onAccuracyChanged(Sensor sensor, int accuracy) {   
+}@Overridepublic void onSensorChanged(SensorE...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/02/19/2017.02.19_手机感应/#more">Read More</a>
+        </p>
       
     </div>
-    
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
   </div>
-  
   
 </article>
 
+<!-- Table of Contents -->
+
+
   
-    <article id="post-2016.10.15_viewpage" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-2016.10.15_viewpage" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="/2016/11/15/2016.10.15_viewpage/">自定义不预加载viewpager</a>
     </h1>
   
 
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2016/11/15/2016.10.15_viewpage/" class="article-date">
-  <time datetime="2016-11-15T03:34:17.071Z" itemprop="datePublished">2016-11-15</time>
-</a>
+      </header>
     
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-meta">
       
-        <p>直接把这个工具类拷贝到项目包下，然后引用这个MyViewPager就可以实现不预加载</p>
-<p>下载地址如下</p>
-<p>&lt;com.example.photoutil.MyViewPager</p>
-<pre><code>android:id=&quot;@+id/image&quot;
+	<a href="/2016/11/15/2016.10.15_viewpage/" class="article-date">
+	  <time datetime="2016-11-15T03:34:17.071Z" itemprop="datePublished">2016-11-15</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          直接把这个工具类拷贝到项目包下，然后引用这个MyViewPager就可以实现不预加载
+下载地址如下
+&lt;com.example.photoutil.MyViewPager
+android:id=&quot;@+id/image&quot;
 android:layout_width=&quot;match_parent&quot;
 android:layout_height=&quot;match_parent&quot; &gt;
-</code></pre><p> &lt;/com.example.photoutil.MyViewPager&gt;</p>
-<h2 id="http-pan-baidu-com-s-1i4PlQtB"><a href="#http-pan-baidu-com-s-1i4PlQtB" class="headerlink" title="http://pan.baidu.com/s/1i4PlQtB"></a><a href="http://pan.baidu.com/s/1i4PlQtB" target="_blank" rel="noopener">http://pan.baidu.com/s/1i4PlQtB</a></h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
+ &lt;/com.example.photoutil...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/11/15/2016.10.15_viewpage/#more">Read More</a>
+        </p>
       
     </div>
-    
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
   </div>
-  
   
 </article>
 
+<!-- Table of Contents -->
+
+
   
-    <article id="post-2016.10.04_android自定义相机" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-2016.10.04_android自定义相机" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="/2016/10/04/2016.10.04_android自定义相机/">android自定义相机 前置摄像头拍照，照片旋转180</a>
     </h1>
   
 
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2016/10/04/2016.10.04_android自定义相机/" class="article-date">
-  <time datetime="2016-10-04T03:22:03.395Z" itemprop="datePublished">2016-10-04</time>
-</a>
+      </header>
     
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-meta">
       
-        <p>//前置摄像头预览旋180度</p>
-<p>myCamera = Camera.open();</p>
-<p>myCamera .setDisplayOrientation(180);<br>//保存图片旋转180度解决方法<br>params.set(“orientation”, “portrait”);</p>
-<h2 id="params-set-“rotation”-180"><a href="#params-set-“rotation”-180" class="headerlink" title="params.set(“rotation”, 180);"></a>params.set(“rotation”, 180);</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+	<a href="/2016/10/04/2016.10.04_android自定义相机/" class="article-date">
+	  <time datetime="2016-10-04T03:22:03.395Z" itemprop="datePublished">2016-10-04</time>
+	</a>
 
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          //前置摄像头预览旋180度
+myCamera = Camera.open();
+myCamera .setDisplayOrientation(180);//保存图片旋转180度解决方法params.set(“orientation”, “portrait”);
+params.set(“rotation”, 180);作者：杰骜不驯丶版权声明：本文为博主原创文章，转载请附上博文链接！
+
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/10/04/2016.10.04_android自定义相机/#more">Read More</a>
+        </p>
       
     </div>
-    
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
   </div>
-  
   
 </article>
 
+<!-- Table of Contents -->
+
+
   
-    <article id="post-2015.6.10_toast" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-2015.6.10_toast" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="/2016/05/01/2015.6.10_toast/">Handler中显示Toast的问题</a>
     </h1>
   
 
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2016/05/01/2015.6.10_toast/" class="article-date">
-  <time datetime="2016-05-01T10:04:11.695Z" itemprop="datePublished">2016-05-01</time>
-</a>
+      </header>
     
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-meta">
       
-        <p>大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：</p>
-<p>puiblic static Context mContext;</p>
-<p>然后在onCreate方法中调用 ?mContext = getApplicationContext();</p>
-<h2 id="mContext就是上下文。"><a href="#mContext就是上下文。" class="headerlink" title="mContext就是上下文。"></a>mContext就是上下文。</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+	<a href="/2016/05/01/2015.6.10_toast/" class="article-date">
+	  <time datetime="2016-05-01T10:04:11.695Z" itemprop="datePublished">2016-05-01</time>
+	</a>
 
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：
+puiblic static Context mContext;
+然后在onCreate方法中调用 ?mContext = getApplicationContext();
+mContext就是上下文。作者：杰骜不驯丶版权声明：本文为博主原创文章，转载请附上博文链接！
+
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/05/01/2015.6.10_toast/#more">Read More</a>
+        </p>
       
     </div>
-    
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
   </div>
-  
   
 </article>
 
+<!-- Table of Contents -->
+
+
   
-    <article id="post-2015.12.30_surfaceCreated" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-2015.12.30_surfaceCreated" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="/2015/12/30/2015.12.30_surfaceCreated/">surfaceCreated方法报setParameters failed错解决办法</a>
     </h1>
   
 
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2015/12/30/2015.12.30_surfaceCreated/" class="article-date">
-  <time datetime="2015-12-30T02:02:55.374Z" itemprop="datePublished">2015-12-30</time>
-</a>
+      </header>
     
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-meta">
       
-        <p>public void surfaceCreated(SurfaceHolder holder){</p>
-<p>surfaceHolder = holder<br>        Log.d(TAG, “surfaceCreated” + mCamera);</p>
-<pre><code>try {
+	<a href="/2015/12/30/2015.12.30_surfaceCreated/" class="article-date">
+	  <time datetime="2015-12-30T02:02:55.374Z" itemprop="datePublished">2015-12-30</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          public void surfaceCreated(SurfaceHolder holder){
+surfaceHolder = holder        Log.d(TAG, “surfaceCreated” + mCamera);
+try {
     CamcorderProfile profile ;
 
     int numCameras = Camera.getNumberOfCameras();
     if (numCameras &gt; 1) {
-    profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_FRONT,CamcorderProfile.QUALITY_HIGH));
-    }
-    else{
-
-        profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_BACK,CamcorderProfile.QUALITY_HIGH));
-    }
-
-//设置camera预览的角度，因为默认图片是倾斜90度的 ??
-camera.setDisplayOrientation(90);?
-    Camera.Parameters parameters = mCamera.getParameters();
-    parameters.setPreviewSize(profile.videoFrameWidth, profile.videoFrameHeight);
-    mCamera.setParameters(parameters);
-    mCamera.setPreviewDisplay(holder);
-    mCamera.startPreview();
-}
-catch (IOException e) {
-
-}}
-</code></pre><hr>
-<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
+    profil...
+        </p>
+        <p class="article-more-link">
+          <a href="/2015/12/30/2015.12.30_surfaceCreated/#more">Read More</a>
+        </p>
       
     </div>
-    
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
   </div>
   
-  
 </article>
+
+<!-- Table of Contents -->
+
 
   
 
@@ -443,137 +593,189 @@ catch (IOException e) {
     <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
-
 </section>
-        <aside id="sidebar">
-  
-    <div class="widget-box">
-  <div class="avatar-box">
-    <img class="avatar" src="/images/default-avatar.jpg" title="图片来自网络">
-    <h3 class="avatar-name">
-      
-        杰骜不驯
-      
-    </h3>
-    <p class="avatar-slogan">
-      鸟随鸾凤飞腾远，人伴贤良品自高。与君共饮盏中酒，几人哀伤几人愁。
-    </p>
-  </div>
-</div>
-
-
-  
-    
-
-  
-    
-  <div class="widget-box">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-box">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-box">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-box">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
         
-          <li>
-            <a href="/2019/11/29/2019.11.29/">播放音乐</a>
-          </li>
-        
-          <li>
-            <a href="/2019/03/02/2019.03.02_virtuaxposed打不开自己应用原因/">VirtuaXposed 打不开自己应用原因</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/04/2019.01.04_直接跳转到支付宝转账付款各种链接/">直接跳转到支付宝进行付款和转账链接</a>
-          </li>
-        
-          <li>
-            <a href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/">抓取手机状态栏所有通知消息</a>
-          </li>
-        
-          <li>
-            <a href="/2018/12/26/2018.12.26_支付宝拉起红包链接/">支付宝自动跳转到搜索红包地址</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-      <div class="widget-box">
-    <h3 class="widget-title">友链</h3>
-    <div class="widget">
-      
-        <a style="display: block;" href="https://wangjie9.github.io/" title="" target="_blank">QQ（991036184）</a>
-      
-    </div>
-  </div>
-
-  
-</aside>
       </div>
+      
+        <div align="center" style="margin-top: 30px;"><hr class="hr" style="margin:0px; height:3px;"></div>
+      
       <footer id="footer">
-  <div class="foot-box global-width">
-    &copy; 2019 John Doe &nbsp;&nbsp;
-    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    &nbsp;|&nbsp;主题 <a href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
-    <br>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2019 Jie All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
   </div>
 </footer>
-      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+<!-- min height -->
+
 <script>
-if (!window.jQuery) {
-var script = document.createElement('script');
-script.src = "/js/jquery-2.0.3.min.js";
-document.body.write(script);
-}
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
 </script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js"></script>
+<script src="/js/scripts.js"></script>
+
+
+  <script src="/js/home.js"></script>
 
 
 
-    </div>
-    <nav id="mobile-nav" class="mobile-nav-box">
-  <div class="mobile-nav-img mobile-nav-top"></div>
-  
-    <a href="/" class="mobile-nav-link">首页</a>
-  
-    <a href="/archives" class="mobile-nav-link">归档</a>
-  
-  <div class="mobile-nav-img  mobile-nav-bottom"></div>
-</nav>    
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
   </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Jie
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 John Doe All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
 </body>
 </html>
