@@ -51,6 +51,89 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-2017.06.09_ionic2微信支付,分享,登录" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/09/2017.06.09_ionic2微信支付,分享,登录/">ionic2微信支付,分享,登录</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2017/06/09/2017.06.09_ionic2微信支付,分享,登录/" class="article-date">
+  <time datetime="2017-06-09T03:47:34.503Z" itemprop="datePublished">2017-06-09</time>
+</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>安装<br>安装插件<br>cordova plugin add cordova-plugin-wechat –variable wechatappid=YOUR_WECHAT_APPID<br>安装ionic2、3调用<br>npm install wechat-chenyu –save<br>You also need to install the Ionic Native package for each plugin you want to add. Please see the Ionic Native documentation for complete instructions on how to add and use the plugins.</p>
+<p>Documentation<br>For the full Ionic Native documentation, please visit <a href="https://ionicframework.com/docs/native/" target="_blank" rel="noopener">https://ionicframework.com/docs/native/</a>.</p>
+<p>调用<br>To use a plugin, import and add the plugin provider to your @NgModule, and then inject it where you wish to use it.</p>
+<p>// app.module.ts<br>import {WechatChenyu} from “wechat-chenyu”;</p>
+<p>…</p>
+<p>@NgModule({<br>  …</p>
+<p>  providers: [<br>    …<br>    WechatChenyu<br>    …<br>  ]<br>  …<br>})<br>export class AppModule { }<br>import {WechatChenyu} from “wechat-chenyu”;</p>
+<p>@Component({ … })<br>export class xxxxPage {<br>constructor(private wechatChenyu: WechatChenyu){}<br>   //微信支付<br>   // obj 是从服务器获取的参数<br>   WchatPay(obj) {<br>       console.log(obj);<br>       let params = {<br>         partnerid: obj.partnerid, // merchant id<br>         prepayid: obj.prepayid, // prepay id<br>         noncestr: obj.noncestr, // nonce<br>         timestamp: obj.timestamp, // timestamp<br>         sign: obj.sign<br>       }<br>       this.wechatChenyu.sendPaymentRequest(params).then((data) =&gt; {</p>
+<pre><code>    /*let alert = this.alertCtrl.create({
+      title: &apos;充值提示！&apos;,
+      subTitle: JSON.stringify(data),
+      buttons: [&apos;确定&apos;]
+    });
+    alert.present();
+    */
+    }, eoor =&gt; {
+
+    }
+  );
+}
+//判断是否安装微信
+isInstalled(){
+  this.wechatChenyu.isInstalled().then();
+}
+//微信登录
+auth(){
+   this.wechatChenyu.auth().then(); 
+}
+//分享obj参考 https://www.npmjs.com/package/cordova-plugin-wechat
+share(){
+    let obj={
+                message: {
+                    title: &quot;Hi, there&quot;,
+                    description: &quot;This is description.&quot;,
+                    thumb: &quot;www/img/thumbnail.png&quot;,
+                    mediaTagName: &quot;TEST-TAG-001&quot;,
+                    messageExt: &quot;这是第三方带的测试字段&quot;,
+                    messageAction: &quot;&lt;action&gt;dotalist&lt;/action&gt;&quot;,
+                    media: &quot;YOUR_MEDIA_OBJECT_HERE&quot;
+                },
+                scene: 1   // 代表朋友圈、参数列表
+            };
+   this.wechatChenyu.share(obj).then();  
+}
+</code></pre><p>}<br>参数列表</p>
+<h2 id="scene-0-聊天界面-1-朋友圈-2-收藏"><a href="#scene-0-聊天界面-1-朋友圈-2-收藏" class="headerlink" title="scene 0, // 聊天界面 1, // 朋友圈 2 // 收藏"></a>scene 0, // 聊天界面 1, // 朋友圈 2 // 收藏</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-2017.06.09_手机GPS获取海拔" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
   
     <header class="article-header">
@@ -470,7 +553,7 @@ catch (IOException e) {
   <div class="widget-box">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xposed/">xposed</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paython/">Paython</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xposed/">xposed</a></li></ul>
     </div>
   </div>
 
@@ -480,7 +563,7 @@ catch (IOException e) {
   <div class="widget-box">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/xposed/" style="font-size: 10px;">xposed</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Paython/" style="font-size: 10px;">Paython</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/xposed/" style="font-size: 15px;">xposed</a>
     </div>
   </div>
 
@@ -501,6 +584,10 @@ catch (IOException e) {
       <ul>
         
           <li>
+            <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/">Paython爬取微博用户userId</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/05/2019.12.05_Xposed/">Xposed</a>
           </li>
         
@@ -514,10 +601,6 @@ catch (IOException e) {
         
           <li>
             <a href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/">抓取手机状态栏所有通知消息</a>
-          </li>
-        
-          <li>
-            <a href="/2018/12/26/2018.12.26_支付宝拉起红包链接/">支付宝自动跳转到搜索红包地址</a>
           </li>
         
       </ul>

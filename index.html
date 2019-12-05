@@ -51,6 +51,46 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-2019.12.05_Paython爬取微博userId" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/2019.12.05_Paython爬取微博userId/">Paython爬取微博用户userId</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/" class="article-date">
+  <time datetime="2019-12-05T07:41:56.512Z" itemprop="datePublished">2019-12-05</time>
+</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paython/">Paython</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <div class="highlight-box" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">from urllib import parse</span><br><span class="line"></span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 微博根据用户名查找userId</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># userName 用户名</span><br><span class="line"># pageNum 查询页数，每页20个数据。 默认为第一页值为1，第二页值为2，以此类推。</span><br><span class="line">def getUserId(userName, pageNum):</span><br><span class="line">    # 用户名需要URL编码后</span><br><span class="line">    html_doc = &quot;https://s.weibo.com/user/&amp;nickname=&quot; + parse.quote(userName) + &quot;&amp;page=&quot; + pageNum</span><br><span class="line">    req = urllib.request.Request(html_doc)</span><br><span class="line">    webpage = urllib.request.urlopen(req)</span><br><span class="line">    html = webpage.read()</span><br><span class="line">    soup = BeautifulSoup(html, &apos;html.parser&apos;)  # 文档对象</span><br><span class="line">    if soup:</span><br><span class="line">        print(&quot;找到html&quot;)</span><br><span class="line">    # 第一步：抓取a标签</span><br><span class="line">    # &lt;a class=&quot;name&quot; href=&quot;//weibo.com/u/5288987897&quot; suda-data=&quot;key=tblog_search_weibo&amp;amp;value=seqid:157406704247901067764|type:3|t:0|pos:1-0|q:|ext:mpos:1,click:user_name&quot; target=&quot;_blank&quot;&gt;暴烈甜心&lt;em class=&quot;s-color-red&quot;&gt;小&lt;/em&gt;&lt;em class=&quot;s-color-red&quot;&gt;鳄鱼&lt;/em&gt;毛毛&lt;/a&gt;</span><br><span class="line">    for a in soup.find_all(&apos;a&apos;, class_=&apos;name&apos;):</span><br><span class="line">        if a:</span><br><span class="line">            # 第二步：抓取a标签中用户名</span><br><span class="line">            rpuserName = a.get_text()</span><br><span class="line">            print(&quot;搜到用户名=&quot; + rpuserName)</span><br><span class="line">            # 第三步： 判断是否有该用户，如果有，获取该用户userId</span><br><span class="line">            if a.get_text(strip=True) == userName:</span><br><span class="line">                print(&quot;匹配到该用户&quot;)</span><br><span class="line">                print(&quot;用户个人主页链接=&quot; + a[&apos;href&apos;])</span><br><span class="line">                # 第四步：提取userId，然后返回</span><br><span class="line">                userUrl = a[&apos;href&apos;].split(&quot;/&quot;)</span><br><span class="line">                print(userUrl)</span><br><span class="line">                if userUrl and len(userUrl) &gt; 0:</span><br><span class="line">                    userId = userUrl[len(userUrl) - 1]</span><br><span class="line">                    return &quot;userId=&quot; + userId</span><br><span class="line">                else:</span><br><span class="line">                    return &quot;userID抓取失败&quot;</span><br><span class="line">                break</span><br><span class="line">        else:</span><br><span class="line">            return &quot;没有查找到a标签&quot;</span><br><span class="line">    else:</span><br><span class="line">        return &quot;没有找到数据&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    userName = &quot;用户名&quot;</span><br><span class="line">    print(getUserId(userName, &quot;1&quot;))</span><br></pre></td></tr></table></figure></div>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-2019.12.05_Xposed" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
   
     <header class="article-header">
@@ -819,89 +859,6 @@ public void onNotificationRemoved(StatusBarNotification sbn) {
 </article>
 
   
-    <article id="post-2017.06.09_ionic2微信支付,分享,登录" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/09/2017.06.09_ionic2微信支付,分享,登录/">ionic2微信支付,分享,登录</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2017/06/09/2017.06.09_ionic2微信支付,分享,登录/" class="article-date">
-  <time datetime="2017-06-09T03:47:34.503Z" itemprop="datePublished">2017-06-09</time>
-</a>
-    
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <p>安装<br>安装插件<br>cordova plugin add cordova-plugin-wechat –variable wechatappid=YOUR_WECHAT_APPID<br>安装ionic2、3调用<br>npm install wechat-chenyu –save<br>You also need to install the Ionic Native package for each plugin you want to add. Please see the Ionic Native documentation for complete instructions on how to add and use the plugins.</p>
-<p>Documentation<br>For the full Ionic Native documentation, please visit <a href="https://ionicframework.com/docs/native/" target="_blank" rel="noopener">https://ionicframework.com/docs/native/</a>.</p>
-<p>调用<br>To use a plugin, import and add the plugin provider to your @NgModule, and then inject it where you wish to use it.</p>
-<p>// app.module.ts<br>import {WechatChenyu} from “wechat-chenyu”;</p>
-<p>…</p>
-<p>@NgModule({<br>  …</p>
-<p>  providers: [<br>    …<br>    WechatChenyu<br>    …<br>  ]<br>  …<br>})<br>export class AppModule { }<br>import {WechatChenyu} from “wechat-chenyu”;</p>
-<p>@Component({ … })<br>export class xxxxPage {<br>constructor(private wechatChenyu: WechatChenyu){}<br>   //微信支付<br>   // obj 是从服务器获取的参数<br>   WchatPay(obj) {<br>       console.log(obj);<br>       let params = {<br>         partnerid: obj.partnerid, // merchant id<br>         prepayid: obj.prepayid, // prepay id<br>         noncestr: obj.noncestr, // nonce<br>         timestamp: obj.timestamp, // timestamp<br>         sign: obj.sign<br>       }<br>       this.wechatChenyu.sendPaymentRequest(params).then((data) =&gt; {</p>
-<pre><code>    /*let alert = this.alertCtrl.create({
-      title: &apos;充值提示！&apos;,
-      subTitle: JSON.stringify(data),
-      buttons: [&apos;确定&apos;]
-    });
-    alert.present();
-    */
-    }, eoor =&gt; {
-
-    }
-  );
-}
-//判断是否安装微信
-isInstalled(){
-  this.wechatChenyu.isInstalled().then();
-}
-//微信登录
-auth(){
-   this.wechatChenyu.auth().then(); 
-}
-//分享obj参考 https://www.npmjs.com/package/cordova-plugin-wechat
-share(){
-    let obj={
-                message: {
-                    title: &quot;Hi, there&quot;,
-                    description: &quot;This is description.&quot;,
-                    thumb: &quot;www/img/thumbnail.png&quot;,
-                    mediaTagName: &quot;TEST-TAG-001&quot;,
-                    messageExt: &quot;这是第三方带的测试字段&quot;,
-                    messageAction: &quot;&lt;action&gt;dotalist&lt;/action&gt;&quot;,
-                    media: &quot;YOUR_MEDIA_OBJECT_HERE&quot;
-                },
-                scene: 1   // 代表朋友圈、参数列表
-            };
-   this.wechatChenyu.share(obj).then();  
-}
-</code></pre><p>}<br>参数列表</p>
-<h2 id="scene-0-聊天界面-1-朋友圈-2-收藏"><a href="#scene-0-聊天界面-1-朋友圈-2-收藏" class="headerlink" title="scene 0, // 聊天界面 1, // 朋友圈 2 // 收藏"></a>scene 0, // 聊天界面 1, // 朋友圈 2 // 收藏</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
 
 
   <nav id="page-nav">
@@ -936,7 +893,7 @@ share(){
   <div class="widget-box">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xposed/">xposed</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paython/">Paython</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xposed/">xposed</a></li></ul>
     </div>
   </div>
 
@@ -946,7 +903,7 @@ share(){
   <div class="widget-box">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/xposed/" style="font-size: 10px;">xposed</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Paython/" style="font-size: 10px;">Paython</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/xposed/" style="font-size: 15px;">xposed</a>
     </div>
   </div>
 
@@ -967,6 +924,10 @@ share(){
       <ul>
         
           <li>
+            <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/">Paython爬取微博用户userId</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/05/2019.12.05_Xposed/">Xposed</a>
           </li>
         
@@ -980,10 +941,6 @@ share(){
         
           <li>
             <a href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/">抓取手机状态栏所有通知消息</a>
-          </li>
-        
-          <li>
-            <a href="/2018/12/26/2018.12.26_支付宝拉起红包链接/">支付宝自动跳转到搜索红包地址</a>
           </li>
         
       </ul>
