@@ -86,8 +86,21 @@
 <p>当系统中安装了 Xposed Framework 之后，会对 app_process 进行扩展，也就是说，Xposed Framework 会拿自己实现的 app_process 覆盖掉 Android 原生提供的 app_process 文件，当系统启动的时候，就会加载由 Xposed Framework 替换过的进程文件，并且XposedFramework 还有一个 jar 包，系统启动的时候，也会加载这个包：XposedBridge.jar。</p>
 <p>Xposed运行的条件</p>
 <p>1、从上述原理可以看出Xposed需要替换/system/bin/app_process，因此需要手机获得root权限；<br>2、手机需要安装XposedInstaller.apk；</p>
-<p>Xposed使用步骤：<br>（1）：AndroidManifest.xml 中设置 标记为一个模块<br>“<br>         标记xposed插件<br>               <meta-data android:name="xposedmodule" android:value="true"><br>               模块描述<br>               <meta-data android:name="xposeddescription" android:value="我的一个模块"><br>               最低版本号<br>               <meta-data android:name="xposedminversion" android:value="54"><br>​”         </meta-data></meta-data></meta-data></p>
-<p>（2）：assets中创建一个文件xposed_init，里面写MainHook的全路径就可以了。</p>
+<p>Xposed使用步骤：<br>（1）：AndroidManifest.xml 中设置 标记为一个模块</p>
+<pre><code>         标记xposed插件
+               &lt;meta-data
+                   android:name=&quot;xposedmodule&quot;
+                   android:value=&quot;true&quot; /&gt;
+               模块描述
+               &lt;meta-data
+                   android:name=&quot;xposeddescription&quot;
+                   android:value=&quot;我的一个模块&quot; /&gt;
+               最低版本号
+               &lt;meta-data
+                   android:name=&quot;xposedminversion&quot;
+                   android:value=&quot;54&quot; /&gt; 
+​
+</code></pre><p>（2）：assets中创建一个文件xposed_init，里面写MainHook的全路径就可以了。</p>
 <hr>
 <p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 
