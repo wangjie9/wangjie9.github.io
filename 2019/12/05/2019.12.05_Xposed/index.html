@@ -5,18 +5,23 @@
   
 
   
-  <title>Archives: 2015/12 | Jie</title>
+  <title>Xposed | Jie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jie">
-<meta property="og:url" content="http://jieaobuxun.cn/archives/2015/12/index.html">
+  <meta name="description" content="简介：Xposed框架的原理是替换安卓系统/System/bin目录下的文件，从而实现对系统某些功能的替换，进而给予基于 Xposed 框架开发的App更多权限。 优点：1、功能强大2、执行效率快缺点：1、开发周期长2、容易被风控3、手机需要root 运行原理：Xposed通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载X">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xposed">
+<meta property="og:url" content="http://jieaobuxun.cn/2019/12/05/2019.12.05_Xposed/index.html">
 <meta property="og:site_name" content="Jie">
+<meta property="og:description" content="简介：Xposed框架的原理是替换安卓系统/System/bin目录下的文件，从而实现对系统某些功能的替换，进而给予基于 Xposed 框架开发的App更多权限。 优点：1、功能强大2、执行效率快缺点：1、开发周期长2、容易被风控3、手机需要root 运行原理：Xposed通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载X">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-12-05T06:30:17.701Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jie">
+<meta name="twitter:title" content="Xposed">
+<meta name="twitter:description" content="简介：Xposed框架的原理是替换安卓系统/System/bin目录下的文件，从而实现对系统某些功能的替换，进而给予基于 Xposed 框架开发的App更多权限。 优点：1、功能强大2、执行效率快缺点：1、开发周期长2、容易被风控3、手机需要root 运行原理：Xposed通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载X">
   
     <link rel="alternate" href="/atom.xml" title="Jie" type="application/atom+xml">
   
@@ -49,47 +54,92 @@
   </div>
 </header>
       <div id="middlecontent" title class="global-width sidebar-right">
-        <section id="main">
+        <section id="main"><article id="post-2019.12.05_Xposed" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="global-container archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
+    <header class="article-header">
       
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/30/2015.12.30_surfaceCreated/">surfaceCreated方法报setParameters failed错解决办法</a>
+    <h1 class="article-title" itemprop="name">
+      Xposed
     </h1>
   
-      
+
     </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2015/12/30/2015.12.30_surfaceCreated/" class="article-date">
-  <time datetime="2015-12-30T02:02:55.374Z" itemprop="datePublished">2015-12-30</time>
+  
+  <div class="article-meta">
+    <a href="/2019/12/05/2019.12.05_Xposed/" class="article-date">
+  <time datetime="2019-12-05T06:30:17.524Z" itemprop="datePublished">2019-12-05</time>
 </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
 
-    </div>
   </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>简介：<br>Xposed框架的原理是替换安卓系统/System/bin目录下的文件，从而实现对系统某些功能的替换，进而给予基于 Xposed 框架开发的App更多权限。</p>
+<p>优点：<br>1、功能强大<br>2、执行效率快<br>缺点：<br>1、开发周期长<br>2、容易被风控<br>3、手机需要root</p>
+<p>运行原理：<br>Xposed通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载XposedBridge.jar这个jar包，从而完成对Zygote进程及其创建的Dalvik虚拟机的劫持;</p>
+<p>当系统中安装了 Xposed Framework 之后，会对 app_process 进行扩展，也就是说，Xposed Framework 会拿自己实现的 app_process 覆盖掉 Android 原生提供的 app_process 文件，当系统启动的时候，就会加载由 Xposed Framework 替换过的进程文件，并且XposedFramework 还有一个 jar 包，系统启动的时候，也会加载这个包：XposedBridge.jar。</p>
+<p>Xposed运行的条件</p>
+<p>1、从上述原理可以看出Xposed需要替换/system/bin/app_process，因此需要手机获得root权限；<br>2、手机需要安装XposedInstaller.apk；</p>
+<p>Xposed使用步骤：<br>（1）：AndroidManifest.xml 中设置 标记为一个模块<br>       <!-- 标记xposed插件 --><br>        <meta-data android:name="xposedmodule" android:value="true"><br>        <!-- 模块描述 --><br>        <meta-data android:name="xposeddescription" android:value="我的一个模块"><br>        <!-- 最低版本号 --><br>        <meta-data android:name="xposedminversion" android:value="54"></meta-data></meta-data></meta-data></p>
+<p>（2）：assets中创建一个文件xposed_init，里面写MainHook的全路径就可以了。</p>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2019/11/29/2019.11.29/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">听一曲&lt;&lt;从前&gt;&gt;</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    <link rel="stylesheet" href="/css/gitment.css"> 
+<script src="/js/gitment.js"></script>
+
+<div id="gitmentContainer"></div>
+
+<script>
+var gitment = new Gitment({
+  owner: '',
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
 </article>
-  
-  
-    </div></section>
-  
-
-
 </section>
         <aside id="sidebar">
   
