@@ -11,14 +11,14 @@
   
   
   <meta name="description" content="简介：Xposed框架的原理是替换安卓系统/System/bin目录下的文件，从而实现对系统某些功能的替换，进而给予基于 Xposed 框架开发的App更多权限。 优点：1、功能强大2、执行效率快缺点：1、开发周期长2、容易被风控3、手机需要root 运行原理：Xposed通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载X">
-<meta name="keywords" content="android">
+<meta name="keywords" content="xposed">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Xposed">
 <meta property="og:url" content="http://jieaobuxun.cn/2019/12/05/2019.12.05_Xposed/index.html">
 <meta property="og:site_name" content="Jie">
 <meta property="og:description" content="简介：Xposed框架的原理是替换安卓系统/System/bin目录下的文件，从而实现对系统某些功能的替换，进而给予基于 Xposed 框架开发的App更多权限。 优点：1、功能强大2、执行效率快缺点：1、开发周期长2、容易被风控3、手机需要root 运行原理：Xposed通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载X">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-12-05T06:34:34.030Z">
+<meta property="og:updated_time" content="2019-12-05T06:36:30.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xposed">
 <meta name="twitter:description" content="简介：Xposed框架的原理是替换安卓系统/System/bin目录下的文件，从而实现对系统某些功能的替换，进而给予基于 Xposed 框架开发的App更多权限。 优点：1、功能强大2、执行效率快缺点：1、开发周期长2、容易被风控3、手机需要root 运行原理：Xposed通过替换/system/bin/app_process程序控制zygote进程，使得app_process在启动过程中会加载X">
@@ -72,7 +72,7 @@
 </a>
     
     
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xposed/">xposed</a></li></ul>
 
   </div>
   
@@ -91,18 +91,7 @@
 <p>当系统中安装了 Xposed Framework 之后，会对 app_process 进行扩展，也就是说，Xposed Framework 会拿自己实现的 app_process 覆盖掉 Android 原生提供的 app_process 文件，当系统启动的时候，就会加载由 Xposed Framework 替换过的进程文件，并且XposedFramework 还有一个 jar 包，系统启动的时候，也会加载这个包：XposedBridge.jar。</p>
 <p>Xposed运行的条件</p>
 <p>1、从上述原理可以看出Xposed需要替换/system/bin/app_process，因此需要手机获得root权限；<br>2、手机需要安装XposedInstaller.apk；</p>
-<p>Xposed使用步骤：<br>（1）：AndroidManifest.xml 中设置 标记为一个模块<br><!--        标记xposed插件
-               <meta-data
-                   android:name="xposedmodule"
-                   android:value="true" />
-               模块描述
-               <meta-data
-                   android:name="xposeddescription"
-                   android:value="我的一个模块" />
-               最低版本号
-               <meta-data
-                   android:name="xposedminversion"
-                   android:value="54" /> --></p>
+<p>Xposed使用步骤：<br>（1）：AndroidManifest.xml 中设置 标记为一个模块<br>         标记xposed插件<br>               <meta-data android:name="xposedmodule" android:value="true"><br>               模块描述<br>               <meta-data android:name="xposeddescription" android:value="我的一个模块"><br>               最低版本号<br>               <meta-data android:name="xposedminversion" android:value="54"> </meta-data></meta-data></meta-data></p>
 <p>（2）：assets中创建一个文件xposed_init，里面写MainHook的全路径就可以了。</p>
 <hr>
 <p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
@@ -177,7 +166,7 @@ gitment.render('gitmentContainer')
   <div class="widget-box">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xposed/">xposed</a></li></ul>
     </div>
   </div>
 
@@ -187,7 +176,7 @@ gitment.render('gitmentContainer')
   <div class="widget-box">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/xposed/" style="font-size: 10px;">xposed</a>
     </div>
   </div>
 
