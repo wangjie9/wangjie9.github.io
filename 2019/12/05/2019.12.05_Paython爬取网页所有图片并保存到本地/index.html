@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Paython爬取网页所有图片并保存到本地 | Jie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667# coding=utf-8from urllib import requestfrom bs4 import BeautifulSoupimport">
+<meta name="keywords" content="Paython">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paython爬取网页所有图片并保存到本地">
+<meta property="og:url" content="http://jieaobuxun.cn/2019/12/05/2019.12.05_Paython爬取网页所有图片并保存到本地/index.html">
+<meta property="og:site_name" content="Jie">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667# coding=utf-8from urllib import requestfrom bs4 import BeautifulSoupimport">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-12-05T08:08:25.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Paython爬取网页所有图片并保存到本地">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667# coding=utf-8from urllib import requestfrom bs4 import BeautifulSoupimport">
+  
+    <link rel="alternate" href="/atom.xml" title="Jie" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/default-avatar.jpg">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+</head>
+</html>
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title="">首页</a>
+      
+        <a class="nav-item" href="/archives" title="">归档</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main"><article id="post-2019.12.05_Paython爬取网页所有图片并保存到本地" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      Paython爬取网页所有图片并保存到本地
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/12/05/2019.12.05_Paython爬取网页所有图片并保存到本地/" class="article-date">
+  <time datetime="2019-12-05T08:08:25.290Z" itemprop="datePublished">2019-12-05</time>
+</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paython/">Paython</a></li></ul>
+
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <div class="highlight-box" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"># coding=utf-8</span><br><span class="line"></span><br><span class="line">from urllib import request</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">import requests</span><br><span class="line"># import urllib</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line"># 目标地址</span><br><span class="line">url = &quot;http://www.biqukan.com/&quot;</span><br><span class="line"># 像目标URL发送get请求</span><br><span class="line">req = request.Request(url)</span><br><span class="line"># 获取URL请求内容</span><br><span class="line">response = request.urlopen(req)</span><br><span class="line"># 读取返回的HTML内容</span><br><span class="line">html = response.read()</span><br><span class="line">print(html)</span><br><span class="line"></span><br><span class="line"># 解析HTML</span><br><span class="line">soup = BeautifulSoup(html, &apos;html.parser&apos;)</span><br><span class="line"></span><br><span class="line"># 使用find_all方法查找HTML中所有&lt;img&gt;标签</span><br><span class="line">all_img = soup.find_all(&apos;img&apos;)</span><br><span class="line">print(all_img)</span><br><span class="line"></span><br><span class="line"># 遍历所有爬取到的&lt;img&gt;</span><br><span class="line">for img in all_img:</span><br><span class="line">    scr = img[&apos;src&apos;]</span><br><span class="line">    # 获取遍历&lt;img&gt;得到的图片src地址</span><br><span class="line">    img_url = scr</span><br><span class="line">    print(img_url)</span><br><span class="line">    print(img)</span><br><span class="line">    # 拼接图片下载完整地址</span><br><span class="line">    img_full_url = url + img_url</span><br><span class="line">    print(img_full_url)</span><br><span class="line"></span><br><span class="line">    # 遍历获取图片名称</span><br><span class="line">    for alt in all_img:</span><br><span class="line">        print(&apos;alt = &apos;, alt)</span><br><span class="line"></span><br><span class="line">        # 定义存储位置</span><br><span class="line">        root = &quot;D://PythonDownload/test/&quot;</span><br><span class="line">        alt = img[&apos;alt&apos;]</span><br><span class="line">        # 定义图片存储名称和格式</span><br><span class="line">        # path = root + img_full_url.split(&apos;/&apos;)[-1] + &quot;.jpg&quot;     # 使用完整下载地址最后分割部分作为图片名称</span><br><span class="line">        path = root + alt + &quot;.png&quot;</span><br><span class="line"></span><br><span class="line">        try:</span><br><span class="line">            # 判断路径是否存在</span><br><span class="line">            if not os.path.exists(root):</span><br><span class="line">                print(&apos;没有路径,请新建&apos;)</span><br><span class="line">                os.mkdir(root)</span><br><span class="line">            # 判断图片是否存在</span><br><span class="line">            if not os.path.exists(path):</span><br><span class="line">                print(&apos;文件夹没有图片&apos;)</span><br><span class="line">                r = requests.get(img_full_url)</span><br><span class="line">                # 检查请求是否成功</span><br><span class="line">                r.raise_for_status()</span><br><span class="line">                # wb表示写入二进制文件，使用r.content方式响应二进制内容</span><br><span class="line">                with open(path, &quot;wb&quot;) as f:</span><br><span class="line">                    f.write(r.content)</span><br><span class="line">                print(&apos;爬取完成&apos;)</span><br><span class="line">            else:</span><br><span class="line">                print(&apos;图片已经存在&apos;)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            print(&apos;爬取失败：&apos; + str(e))</span><br><span class="line">            break</span><br></pre></td></tr></table></figure></div>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2019/12/05/2019.12.05_修改微信步数/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">修改微信步数</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    <link rel="stylesheet" href="/css/gitment.css"> 
+<script src="/js/gitment.js"></script>
+
+<div id="gitmentContainer"></div>
+
+<script>
+var gitment = new Gitment({
+  owner: '',
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
+</article>
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/default-avatar.jpg" title="图片来自网络">
+    <h3 class="avatar-name">
+      
+        杰骜不驯
+      
+    </h3>
+    <p class="avatar-slogan">
+      鸟随鸾凤飞腾远，人伴贤良品自高。与君共饮盏中酒，几人哀伤几人愁。
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paython/">Paython</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ionic/">ionic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xposed/">xposed</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Paython/" style="font-size: 10px;">Paython</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/xposed/" style="font-size: 15px;">xposed</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/05/2019.12.05_Paython爬取网页所有图片并保存到本地/">Paython爬取网页所有图片并保存到本地</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/05/2019.12.05_修改微信步数/">修改微信步数</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/">Paython爬取微博用户userId</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/05/2019.12.05_Xposed/">Xposed</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/02/2019.03.02_virtuaxposed打不开自己应用原因/">VirtuaXposed 打不开自己应用原因</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://wangjie9.github.io/" title="" target="_blank">QQ（991036184）</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2019 John Doe &nbsp;&nbsp;
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>
