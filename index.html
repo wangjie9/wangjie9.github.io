@@ -51,6 +51,47 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-2019.12.05_修改微信步数" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/2019.12.05_修改微信步数/">修改微信步数</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/12/05/2019.12.05_修改微信步数/" class="article-date">
+  <time datetime="2019-12-05T07:59:40.536Z" itemprop="datePublished">2019-12-05</time>
+</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xposed/">xposed</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p> 通过Hook到手机传感器，修改传感每次运动的真实数据，增加自定义步数</p>
+<div class="highlight-box" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    //Hook到手机传感器，模拟步数</span><br><span class="line">    final Class&lt;?&gt; sensorEL = findClass(&quot;android.hardware.SystemSensorManager$SensorEventQueue&quot;, loadPackageParam.classLoader);</span><br><span class="line">private  int sportsCount = 1;</span><br><span class="line">      XposedBridge.hookAllMethods(sensorEL, &quot;dispatchSensorEvent&quot;, new XC_MethodHook() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;</span><br><span class="line">              Log.e(&quot; wx_wx_sports &quot;, &quot; param.args[0]= &quot; + param.args[0]);</span><br><span class="line">              Log.e(&quot; wx_wx_sports &quot;, &quot; param.args[1]= &quot; + param.args[1]);</span><br><span class="line">              Log.e(&quot; wx_sports &quot;, &quot; start= &quot; + ((float[]) param.args[1])[0]);</span><br><span class="line">              ((float[]) param.args[1])[0] = ((float[]) param.args[1])[0] + 1234 * sportsCount;</span><br><span class="line">              sportsCount++;</span><br><span class="line">              Log.e(&quot; wx_sports &quot;, &quot; end= &quot; + ((float[]) param.args[1])[0]);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure></div>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-2019.12.05_Paython爬取微博userId" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
   
     <header class="article-header">
@@ -782,84 +823,6 @@ public void onNotificationRemoved(StatusBarNotification sbn) {
 </article>
 
   
-    <article id="post-2017.11.09_ionic2、3调用[极光IM] jmessage-ionic2" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/09/2017.11.09_ionic2、3调用[极光IM] jmessage-ionic2/">ionic2、3调用[极光IM] jmessage-ionic2</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2017/11/09/2017.11.09_ionic2、3调用[极光IM] jmessage-ionic2/" class="article-date">
-  <time datetime="2017-11-09T03:51:25.924Z" itemprop="datePublished">2017-11-09</time>
-</a>
-    
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <p>jmessage-chenyu </p>
-<p>Jmessage Native<br>为极光IM即时通讯写的ionic2、3写的调用方式</p>
-<p>安装<br>安装插件<br>cordova plugin add jmessage-phonegap-plugin –variable APP_KEY=your_app_key<br>安装ionic2、3调用<br>npm install jmessage-chenyu –save<br>官方文档</p>
-<p>For the full Ionic Native documentation, please visit <a href="https://ionicframework.com/docs/native/" target="_blank" rel="noopener">https://ionicframework.com/docs/native/</a>.</p>
-<p>调用<br>需要把包装类注入到 @NgModule, providers 中，然后调用</p>
-<p>// app.module.ts<br>import {JmessageChenyu} from “jmessage-chenyu”;<br>…</p>
-<p>@NgModule({<br>  …</p>
-<p>  providers: [<br>    …<br>    JmessageChenyu<br>    …<br>  ]<br>  …<br>})<br>export class AppModule { }<br>import {JmessageChenyu} from “jmessage-chenyu”;<br>import { Platform } from ‘ionic-angular’;</p>
-<p>import { NgZone } from ‘@angular/core’;</p>
-<p>@Component({ … })<br>export class MyComponent {</p>
-<p>  constructor(private jMessageChenyu: JmessageChenyu, private platform: Platform) {</p>
-<pre><code>platform.ready().then(() =&gt; {
-
-  // 初始化插件
-  this.jMessageChenyu.init({ isOpenMessageRoaming: true })
-  //用户注册。
-  let obj ={username: id, password: &apos;123456&apos;}
-  //obj对应的参数详情请看文档
-  //https://github.com/jpush/jmessage-phonegap-plugin/wiki/APIs
-  this.jMessageChenyu.register(obj)
-        .then(() =&gt; {
-          this.toast(&quot;注册成功，请登录！&quot;)
-        })
-        .catch((error) =&gt; {
-          this.toast(&quot;注册失败&quot; + JSON.stringify(error))
-        });
-  //用户登录
-  this.jMessageChenyu.login(obj).then(
-      //代码
-   )
-  this.jMessageChenyu.logout().then(
-        //代码
-  )
-  //获取用户信息
-  this.jMessageChenyu.getMyInfo().then()
-  // 此处省略很多方法... 详情对照https://github.com/jpush/jmessage-phonegap-plugin/wiki/APIs 方法名
-
-
-});
-</code></pre><p>  }</p>
-<h2 id=""><a href="#" class="headerlink" title="}"></a>}</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
 
 
   <nav id="page-nav">
@@ -904,7 +867,7 @@ public void onNotificationRemoved(StatusBarNotification sbn) {
   <div class="widget-box">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Paython/" style="font-size: 10px;">Paython</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/xposed/" style="font-size: 15px;">xposed</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Paython/" style="font-size: 10px;">Paython</a> <a href="/tags/ionic/" style="font-size: 13.33px;">ionic</a> <a href="/tags/xposed/" style="font-size: 16.67px;">xposed</a>
     </div>
   </div>
 
@@ -925,6 +888,10 @@ public void onNotificationRemoved(StatusBarNotification sbn) {
       <ul>
         
           <li>
+            <a href="/2019/12/05/2019.12.05_修改微信步数/">修改微信步数</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/">Paython爬取微博用户userId</a>
           </li>
         
@@ -938,10 +905,6 @@ public void onNotificationRemoved(StatusBarNotification sbn) {
         
           <li>
             <a href="/2019/01/04/2019.01.04_直接跳转到支付宝转账付款各种链接/">直接跳转到支付宝进行付款和转账链接</a>
-          </li>
-        
-          <li>
-            <a href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/">抓取手机状态栏所有通知消息</a>
           </li>
         
       </ul>

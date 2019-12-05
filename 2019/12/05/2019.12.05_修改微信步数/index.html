@@ -5,18 +5,23 @@
   
 
   
-  <title>Tag: Paython | Jie</title>
+  <title>修改微信步数 | Jie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jie">
-<meta property="og:url" content="http://jieaobuxun.cn/tags/Paython/index.html">
+  <meta name="description" content="通过Hook到手机传感器，修改传感每次运动的真实数据，增加自定义步数 1234567891011121314    //Hook到手机传感器，模拟步数    final Class&amp;lt;?&amp;gt; sensorEL = findClass(&amp;quot;android.hardware.SystemSensorManager$SensorEventQueue&amp;quot;, loadPackage">
+<meta name="keywords" content="xposed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修改微信步数">
+<meta property="og:url" content="http://jieaobuxun.cn/2019/12/05/2019.12.05_修改微信步数/index.html">
 <meta property="og:site_name" content="Jie">
+<meta property="og:description" content="通过Hook到手机传感器，修改传感每次运动的真实数据，增加自定义步数 1234567891011121314    //Hook到手机传感器，模拟步数    final Class&amp;lt;?&amp;gt; sensorEL = findClass(&amp;quot;android.hardware.SystemSensorManager$SensorEventQueue&amp;quot;, loadPackage">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-12-05T08:00:10.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jie">
+<meta name="twitter:title" content="修改微信步数">
+<meta name="twitter:description" content="通过Hook到手机传感器，修改传感每次运动的真实数据，增加自定义步数 1234567891011121314    //Hook到手机传感器，模拟步数    final Class&amp;lt;?&amp;gt; sensorEL = findClass(&amp;quot;android.hardware.SystemSensorManager$SensorEventQueue&amp;quot;, loadPackage">
   
     <link rel="alternate" href="/atom.xml" title="Jie" type="application/atom+xml">
   
@@ -49,47 +54,86 @@
   </div>
 </header>
       <div id="middlecontent" title class="global-width sidebar-right">
-        <section id="main">
+        <section id="main"><article id="post-2019.12.05_修改微信步数" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="global-container archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
+    <header class="article-header">
       
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/05/2019.12.05_Paython爬取微博userId/">Paython爬取微博用户userId</a>
+    <h1 class="article-title" itemprop="name">
+      修改微信步数
     </h1>
   
-      
+
     </header>
-    <div class="article-meta archive-article-meta">
-      <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/" class="article-date">
-  <time datetime="2019-12-05T07:41:56.512Z" itemprop="datePublished">2019-12-05</time>
+  
+  <div class="article-meta">
+    <a href="/2019/12/05/2019.12.05_修改微信步数/" class="article-date">
+  <time datetime="2019-12-05T07:59:40.536Z" itemprop="datePublished">2019-12-05</time>
 </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paython/">Paython</a></li></ul>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xposed/">xposed</a></li></ul>
 
-    </div>
   </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p> 通过Hook到手机传感器，修改传感每次运动的真实数据，增加自定义步数</p>
+<div class="highlight-box" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    //Hook到手机传感器，模拟步数</span><br><span class="line">    final Class&lt;?&gt; sensorEL = findClass(&quot;android.hardware.SystemSensorManager$SensorEventQueue&quot;, loadPackageParam.classLoader);</span><br><span class="line">private  int sportsCount = 1;</span><br><span class="line">      XposedBridge.hookAllMethods(sensorEL, &quot;dispatchSensorEvent&quot;, new XC_MethodHook() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          protected void beforeHookedMethod(MethodHookParam param) throws Throwable &#123;</span><br><span class="line">              Log.e(&quot; wx_wx_sports &quot;, &quot; param.args[0]= &quot; + param.args[0]);</span><br><span class="line">              Log.e(&quot; wx_wx_sports &quot;, &quot; param.args[1]= &quot; + param.args[1]);</span><br><span class="line">              Log.e(&quot; wx_sports &quot;, &quot; start= &quot; + ((float[]) param.args[1])[0]);</span><br><span class="line">              ((float[]) param.args[1])[0] = ((float[]) param.args[1])[0] + 1234 * sportsCount;</span><br><span class="line">              sportsCount++;</span><br><span class="line">              Log.e(&quot; wx_sports &quot;, &quot; end= &quot; + ((float[]) param.args[1])[0]);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure></div>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Paython爬取微博用户userId</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    <link rel="stylesheet" href="/css/gitment.css"> 
+<script src="/js/gitment.js"></script>
+
+<div id="gitmentContainer"></div>
+
+<script>
+var gitment = new Gitment({
+  owner: '',
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
 </article>
-  
-  
-    </div></section>
-  
-
-
 </section>
         <aside id="sidebar">
   
