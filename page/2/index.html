@@ -51,6 +51,340 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-2018.12.14_AccessibilityService模拟点击&amp;获取页面内容" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/14/2018.12.14_AccessibilityService模拟点击&获取页面内容/">AccessibilityService模拟点击&amp;获取页面内容</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2018/12/14/2018.12.14_AccessibilityService模拟点击&获取页面内容/" class="article-date">
+  <time datetime="2018-12-14T08:16:54.894Z" itemprop="datePublished">2018-12-14</time>
+</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>  #模拟点击,自动生成某宝二维码，下面是一种方法，更优化的需要自己去改进，我在这里写一下最基础的</p>
+<p> ##AccessibilityService 这个方法是为残疾准备的，所以需要开启”无障碍开关来监听界面的窗口”,可以模仿点击登录、抢红包、刷票、各种你想不到的。</p>
+<p>###findAccessibilityNodeInfosByViewId    里面的id需要用AndroidStudio的 AndroidDeviceMonitor 截取</p>
+<p>###findAccessibilityNodeInfosByViewText 里面直接写需要点击的控件名字,比如”登录”</p>
+<p>1：首先要写一个服务实现##AccessibilityService；如下</p>
+<pre><code>public class AutoClickService extends AccessibilityService {
+private static final String TAG = &quot;GK&quot;;
+public static boolean state1=false;
+public static boolean state2=false;
+public static boolean state3=false;
+public static boolean state4=false;
+public static boolean state5=false;
+public static boolean state6=false;
+public static boolean alipayType=true;
+
+@Override
+protected void onServiceConnected() {
+    super.onServiceConnected();
+}
+
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+@Override
+public void onAccessibilityEvent(AccessibilityEvent event) {
+    int eventType = event.getEventType();
+    AccessibilityNodeInfo rootInfo = getRootInActiveWindow();
+    AccessibilityNodeInfo mNodeInfo = event.getSource(); 
+
+    switch (eventType) {
+        case AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED:  //收到通知栏消息
+            Log.e(&quot;收到通知栏消息&quot;,&quot;收到通知栏消息&quot;);
+            break;
+        case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED:    //界面状态改变
+            Log.e(&quot;界面状态改变&quot;,&quot;界面状态改变&quot;);
+            break;
+        case  AccessibilityEvent.TYPE_VIEW_CLICKED:   //点击事件
+            Log.e(&quot;点击事件&quot;,&quot;点击事件&quot;);
+            break;
+        case AccessibilityEvent.CONTENT_CHANGE_TYPE_TEXT: //文本改变
+            Log.e(&quot;文本改变&quot;,&quot;文本改变&quot;);
+            break;
+        case AccessibilityEvent. TYPE_VIEW_HOVER_EXIT: //
+            Log.e(&quot;最后一个窗口&quot;,&quot;最后一个窗口&quot;);
+            break;
+    }
+
+    try {
+
+        if (rootInfo != null) {
+
+
+      collectMoney(mNodeInfo);//点击收钱
+</code></pre><p>//                settingMoney(mNodeInfo);//点击设置金额<br>//                setMoney(mNodeInfo,”0.01”);//输入金额<br>//                addReceiptCause(mNodeInfo);//点击添加收款理由<br>//                setCauser(mNodeInfo,”钱太多WJ”);//设置理由<br>//                clickCommit(mNodeInfo);//点击确定按钮<br>//                savePhoto(mNodeInfo);//保存图片<br>//                rePhotoCode();//解析二维码<br>          bank(mNodeInfo);//返回按钮</p>
+<pre><code>        }
+    }
+    catch (Exception e) {
+    }
+}
+
+@Override
+public void onInterrupt() {
+    Log.e(&quot;-onInterrupt-&quot;,&quot;onInterrupt&quot;);
+}
+
+@Override
+public boolean onUnbind(Intent intent) {
+    Log.e(&quot;-onUnbind-&quot;,&quot;onUnbind&quot;);
+    return super.onUnbind(intent);
+}
+
+/**
+ * 点击收款
+ *
+ * @param mNodeInfo
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public void collectMoney(AccessibilityNodeInfo mNodeInfo) {
+
+    List&lt;AccessibilityNodeInfo&gt; infos = mNodeInfo.findAccessibilityNodeInfosByViewId(&quot;xx.xx.xx&quot;);
+</code></pre><p>//        Log.e(“===点击收款===”, infos.size() + “”);<br>//                rootInfo.recycle();<br>        for (AccessibilityNodeInfo item : infos) {<br>            if (state1){<br>                item.performAction(AccessibilityNodeInfo.ACTION_CLICK);<br>                state1=false;<br>            }<br>        }<br>    }</p>
+<pre><code>/**
+ * 点击设置金额
+ *
+ * @param mNodeInfo
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public void settingMoney(AccessibilityNodeInfo mNodeInfo) {
+
+        List&lt;AccessibilityNodeInfo&gt; infos = mNodeInfo.findAccessibilityNodeInfosByViewId(&quot;xx.xx.xx&quot;);
+</code></pre><p>//        Log.e(“===点击设置金额===”, infos.size() + “”);<br>//                rootInfo.recycle();</p>
+<pre><code>        for (AccessibilityNodeInfo item : infos) {
+            if (state2){
+            item.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                state2=false;
+        }
+    }
+
+}
+
+/**
+ * 点击添加收款理由
+ *
+ * @param mNodeInfo
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public void addReceiptCause(AccessibilityNodeInfo mNodeInfo) {
+    List&lt;AccessibilityNodeInfo&gt; infos = mNodeInfo.findAccessibilityNodeInfosByViewId(&quot;xx.xx.xx&quot;);
+</code></pre><p>//        Log.e(“===点击添加收款理由===”, infos.size() + “”);<br>//                rootInfo.recycle();<br>        for (AccessibilityNodeInfo item : infos) {<br>            if (state3){<br>                item.performAction(AccessibilityNodeInfo.ACTION_CLICK);<br>                state3=false;<br>            }<br>        }<br>    }</p>
+<pre><code>/**
+ * 点击确点按钮
+ *
+ * @param mNodeInfo
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public void clickCommit(AccessibilityNodeInfo mNodeInfo) {//
+    List&lt;AccessibilityNodeInfo&gt; infos = mNodeInfo.findAccessibilityNodeInfosByViewId(&quot;xx.xx.xx&quot;);
+</code></pre><p>//        Log.e(“===点击确点按钮===”, infos.size() + “”);<br>//                rootInfo.recycle();<br>        for (AccessibilityNodeInfo item : infos) {<br>            if (state4){<br>                item.performAction(AccessibilityNodeInfo.ACTION_CLICK);<br>                state4=false;<br>            }<br>        }<br>    }</p>
+<pre><code>/**
+ * 点击保存图片
+ *
+ * @param mNodeInfo
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public void savePhoto(AccessibilityNodeInfo mNodeInfo) {
+    List&lt;AccessibilityNodeInfo&gt; infos = mNodeInfo.findAccessibilityNodeInfosByViewId(&quot;xx.xx.xx&quot;);
+</code></pre><p>//        Log.e(“===点击保存图片===”, infos.size() + “”);<br>//                rootInfo.recycle();<br>        for (AccessibilityNodeInfo item : infos) {<br>            if (state5){<br>                timePhoto = (System.currentTimeMillis()+””).substring(0,10);<br>                Log.e(“当前的时间戳截取后=”,timePhoto);//1540470311571<br>                Log.e(“当前的时间戳跳转前=”,System.currentTimeMillis()+””);<br>                item.performAction(AccessibilityNodeInfo.ACTION_CLICK);<br>                Log.e(“当前的时间戳跳转后=”,System.currentTimeMillis()+””);<br>                state5=false;<br>            }<br>        }<br>    }</p>
+<pre><code>/**
+ * 点击收款记录
+ *
+ * @param mNodeInfo
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public void record(AccessibilityNodeInfo mNodeInfo) {
+    List&lt;AccessibilityNodeInfo&gt; infos = mNodeInfo.findAccessibilityNodeInfosByViewId(&quot;xx.xx.xx&quot;);
+</code></pre><p>//        Log.e(“===点击收款记录===”, infos.size() + “”);<br>//                rootInfo.recycle();<br>        for (AccessibilityNodeInfo item : infos) {<br>            if (state6){<br>                item.performAction(AccessibilityNodeInfo.ACTION_CLICK);<br>                state6=false;<br>            }<br>        }<br>    }<br>    /**</p>
+<pre><code> * 点击返回
+ *
+ * @param mNodeInfo
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public void bank(AccessibilityNodeInfo mNodeInfo) {
+    List&lt;AccessibilityNodeInfo&gt; infos = mNodeInfo.findAccessibilityNodeInfosByViewId(&quot;xx.xx.xx&quot;);
+
+    Log.e(&quot;===点击返回===&quot;, infos.size() + &quot;&quot;);
+</code></pre><p>//                rootInfo.recycle();<br>        for (final AccessibilityNodeInfo item : infos) {<br>            if (state7&lt;2){<br>                state7++;<br>                Handler handler = new Handler();<br>                handler.postDelayed(new Runnable() {<br>                    @Override<br>                    public void run() {<br>                        item.performAction(AccessibilityNodeInfo.ACTION_CLICK);<br>                    }<br>                }, 4000);//3秒后执行Runnable中的run方法</p>
+<pre><code>        }
+    }
+}
+/**
+ * 设置金额
+ *
+ * @param mNodeInfo
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public void setMoney(AccessibilityNodeInfo mNodeInfo,String money) {//
+</code></pre><p>//        Log.e(“===写入金额===”, “**”);<br>        final List<accessibilitynodeinfo> list = mNodeInfo.findAccessibilityNodeInfosByViewId(“xx.xx.xx”);<br>        if (list != null &amp;&amp; !list.isEmpty()) {<br>            AccessibilityNodeInfo info = list.get(0);</accessibilitynodeinfo></p>
+<pre><code>        //粘贴板
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(&quot;label&quot;, money);
+        clipboard.setPrimaryClip(clip);
+
+        CharSequence txt = info.getText();
+        if (txt == null) txt = &quot;&quot;;
+
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            Bundle arguments = new Bundle();
+            arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, 0);
+            arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, txt.length());
+            info.performAction(AccessibilityNodeInfo.ACTION_FOCUS);
+            info.performAction(AccessibilityNodeInfo.ACTION_SET_SELECTION, arguments);
+            info.performAction(AccessibilityNodeInfo.ACTION_PASTE);
+        }
+
+    }
+}
+
+/**
+ * 设置理由
+ *
+ * @param mNodeInfo
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+public void setCauser(AccessibilityNodeInfo mNodeInfo,String str) {
+</code></pre><p>//        Log.e(“===写入理由===”, “**”);<br>        final List<accessibilitynodeinfo> list = mNodeInfo.findAccessibilityNodeInfosByViewId(“xx.xx.xx”);<br>        if (list != null &amp;&amp; !list.isEmpty()) {<br>            AccessibilityNodeInfo info = list.get(1);</accessibilitynodeinfo></p>
+<pre><code>        //粘贴板
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(&quot;label&quot;, str);
+        clipboard.setPrimaryClip(clip);
+
+        CharSequence txt = info.getText();
+        if (txt == null) txt = &quot;&quot;;
+
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            Bundle arguments = new Bundle();
+            arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, 0);
+            arguments.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, txt.length());
+            info.performAction(AccessibilityNodeInfo.ACTION_FOCUS);
+            info.performAction(AccessibilityNodeInfo.ACTION_SET_SELECTION, arguments);
+            info.performAction(AccessibilityNodeInfo.ACTION_PASTE);
+        }
+
+    }
+}
+
+
+
+/**
+ * 解析二维码
+ */
+private void rePhotoCode(){
+    file_ = new File(Environment.getExternalStorageDirectory()+&quot;/DCIM&quot;+&quot;/Camera/&quot;);
+    File[] files = file_.listFiles();
+    if (files != null) {
+        int count = files.length;
+        if(count&gt;0){
+        for (int i = 0; i &lt; count; i++) {
+            File file = files[i];
+            if (i==count-1){
+                photoString = QRCodeDecoder.syncDecodeQRCode(file.getAbsolutePath());
+                Log.e(&quot;解析到的图片内容为=&quot;, photoString);
+                file.delete(); // 删除所有文件
+            }
+
+        }
+        }
+    }
+}
+
+
+
+
+/**
+ * 滑动
+ * 滑动比例 0~20
+ */
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+private void slideVertical() {
+    int screenHeight = ScreenUtils.getScreenHeight(getApplicationContext());
+    int screenWidth = ScreenUtils.getScreenWidth(getApplicationContext());
+    Log.e(&quot;屏幕：&quot; + (screenHeight - (screenHeight / 10)) + &quot;/&quot; +
+            (screenHeight - (screenHeight - (screenHeight / 10))) + &quot;/&quot; + screenWidth / 2,&quot;&quot;);
+
+    Path path = new Path();
+    int start = (screenHeight / 20) * 1;
+    int stop = (screenHeight / 20) * 2;
+    path.moveTo(screenWidth / 2, start);//如果只是设置moveTo就是点击
+    path.lineTo(screenWidth / 2, stop);//如果设置这句就是滑动
+    GestureDescription.Builder builder = new GestureDescription.Builder();
+    GestureDescription gestureDescription = builder
+            .addStroke(new GestureDescription.
+                    StrokeDescription(path,
+                    200,
+                    200))
+            .build();
+
+    dispatchGesture(gestureDescription, new GestureResultCallback() {
+        @Override
+        public void onCompleted(GestureDescription gestureDescription) {
+            super.onCompleted(gestureDescription);
+            Log.e(&quot;滑动结束&quot;,&quot;&quot; + gestureDescription.getStrokeCount());
+</code></pre><p>//                next(next, nextTime);<br>            }</p>
+<pre><code>        @Override
+        public void onCancelled(GestureDescription gestureDescription) {
+            super.onCancelled(gestureDescription);
+            Log.e(&quot;滑动取消&quot;,&quot;&quot;);
+        }
+    }, null);
+}
+</code></pre><p>}</p>
+<p>2：配置服务</p>
+<pre><code>&lt;service
+    android:name=&quot;xx.xx.xx.service.AutoClickService&quot;
+    android:exported=&quot;false&quot;
+    android:label=&quot;OTCPay&quot;
+    android:permission=&quot;android.permission.BIND_ACCESSIBILITY_SERVICE&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.accessibilityservice.AccessibilityService&quot; /&gt;
+    &lt;/intent-filter&gt;
+    &lt;!-- 配置服务服务配置文件路径 --&gt;
+    &lt;meta-data
+        android:name=&quot;android.accessibilityservice&quot;
+        android:resource=&quot;@xml/accessible_service_config&quot; /&gt;
+&lt;/service&gt;
+</code></pre><p>3:  @xml/accessible_service_config 文件内容</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;accessibility-service
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:accessibilityEventTypes=&quot;typeAllMask&quot;
+android:accessibilityFeedbackType=&quot;feedbackGeneric&quot;
+android:accessibilityFlags=&quot;flagReportViewIds&quot;
+android:canRetrieveWindowContent=&quot;true&quot;
+android:notificationTimeout=&quot;0&quot;
+android:description=&quot;@string/description&quot;    //名字随便起     
+android:packageNames=&quot;com.xx.xx.xx&quot; //想要点击的应用包名
+/&gt;
+</code></pre><p>4:     //跳转系统打开自己app名字的无障碍开关<br>      Intent intent2 = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);<br>      startActivity(intent2);</p>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-2018.12.14_NotificationListenerService截取通知" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
   
     <header class="article-header">
@@ -659,77 +993,11 @@ android:layout_height=&quot;match_parent&quot; &gt;
 </article>
 
   
-    <article id="post-2015.12.30_surfaceCreated" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/30/2015.12.30_surfaceCreated/">surfaceCreated方法报setParameters failed错解决办法</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2015/12/30/2015.12.30_surfaceCreated/" class="article-date">
-  <time datetime="2015-12-30T02:02:55.374Z" itemprop="datePublished">2015-12-30</time>
-</a>
-    
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <p>public void surfaceCreated(SurfaceHolder holder){</p>
-<p>surfaceHolder = holder<br>        Log.d(TAG, “surfaceCreated” + mCamera);</p>
-<pre><code>try {
-    CamcorderProfile profile ;
-
-    int numCameras = Camera.getNumberOfCameras();
-    if (numCameras &gt; 1) {
-    profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_FRONT,CamcorderProfile.QUALITY_HIGH));
-    }
-    else{
-
-        profile = (CamcorderProfile
-                .get(Camera.CameraInfo.CAMERA_FACING_BACK,CamcorderProfile.QUALITY_HIGH));
-    }
-
-//设置camera预览的角度，因为默认图片是倾斜90度的 ??
-camera.setDisplayOrientation(90);?
-    Camera.Parameters parameters = mCamera.getParameters();
-    parameters.setPreviewSize(profile.videoFrameWidth, profile.videoFrameHeight);
-    mCamera.setParameters(parameters);
-    mCamera.setPreviewDisplay(holder);
-    mCamera.startPreview();
-}
-catch (IOException e) {
-
-}}
-</code></pre><hr>
-<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 
@@ -769,7 +1037,7 @@ catch (IOException e) {
   <div class="widget-box">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Paython/" style="font-size: 13.33px;">Paython</a> <a href="/tags/doubt/" style="font-size: 10px;">doubt</a> <a href="/tags/ionic/" style="font-size: 13.33px;">ionic</a> <a href="/tags/xposed/" style="font-size: 16.67px;">xposed</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Paython/" style="font-size: 10px;">Paython</a> <a href="/tags/doubt/" style="font-size: 10px;">doubt</a> <a href="/tags/ionic/" style="font-size: 10px;">ionic</a> <a href="/tags/xposed/" style="font-size: 15px;">xposed</a>
     </div>
   </div>
 
@@ -790,6 +1058,10 @@ catch (IOException e) {
       <ul>
         
           <li>
+            <a href="/2019/12/16/2019.12.16_某博给指定用户发送私信思路/">某博给指定用户发送私信思路</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/05/2019.12.05_微博过登录文字验证/">某app过登录文字验证</a>
           </li>
         
@@ -803,10 +1075,6 @@ catch (IOException e) {
         
           <li>
             <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/">Paython爬取微博用户userId</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/05/2019.12.05_Xposed/">Xposed</a>
           </li>
         
       </ul>
