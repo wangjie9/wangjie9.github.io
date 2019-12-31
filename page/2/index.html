@@ -51,6 +51,94 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-2018.12.26_抓取手机通知栏所有消息" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/">抓取手机状态栏所有通知消息</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/" class="article-date">
+  <time datetime="2018-12-26T07:27:36.708Z" itemprop="datePublished">2018-12-26</time>
+</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <pre><code>在NotificationListenerService中使用
+  StatusBarNotification[] statusBarNotifications = getActiveNotifications();
+            for(StatusBarNotification statusBarNotification : statusBarNotifications) {
+                Bundle extras2 = statusBarNotification.getNotification().extras;
+                String title = extras2.getCharSequence(Notification.EXTRA_TITLE)+&quot;--标题&quot;;
+                String text = extras2.getCharSequence(Notification.EXTRA_TEXT)+&quot;--通知内容&quot;;
+                String packageName = statusBarNotification.getPackageName()+&quot;--包名&quot;;//包名字
+                long time = statusBarNotification.getPostTime();//时间
+        }
+</code></pre><hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-2018.12.26_支付宝拉起红包链接" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/26/2018.12.26_支付宝拉起红包链接/">支付宝自动跳转到搜索红包地址</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2018/12/26/2018.12.26_支付宝拉起红包链接/" class="article-date">
+  <time datetime="2018-12-26T07:13:56.873Z" itemprop="datePublished">2018-12-26</time>
+</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>alipays://platformapi/startapp?requestType=hotword_b&amp;appId=20001003&amp;keyword=620066600</p>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-2018.12.14_AccessibilityService模拟点击&amp;获取页面内容" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
   
     <header class="article-header">
@@ -911,88 +999,6 @@ android:layout_height=&quot;match_parent&quot; &gt;
 </article>
 
   
-    <article id="post-2016.10.04_android自定义相机" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/04/2016.10.04_android自定义相机/">android自定义相机 前置摄像头拍照，照片旋转180</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2016/10/04/2016.10.04_android自定义相机/" class="article-date">
-  <time datetime="2016-10-04T03:22:03.395Z" itemprop="datePublished">2016-10-04</time>
-</a>
-    
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <p>//前置摄像头预览旋180度</p>
-<p>myCamera = Camera.open();</p>
-<p>myCamera .setDisplayOrientation(180);<br>//保存图片旋转180度解决方法<br>params.set(“orientation”, “portrait”);</p>
-<h2 id="params-set-“rotation”-180"><a href="#params-set-“rotation”-180" class="headerlink" title="params.set(“rotation”, 180);"></a>params.set(“rotation”, 180);</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
-    <article id="post-2015.6.10_toast" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/01/2015.6.10_toast/">Handler中显示Toast的问题</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2016/05/01/2015.6.10_toast/" class="article-date">
-  <time datetime="2016-05-01T10:04:11.695Z" itemprop="datePublished">2016-05-01</time>
-</a>
-    
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <p>大家handler中无法显示toast的问题只有一个，那就是Context会报错，无法获取上下文，解决办法如下：</p>
-<p>puiblic static Context mContext;</p>
-<p>然后在onCreate方法中调用 ?mContext = getApplicationContext();</p>
-<h2 id="mContext就是上下文。"><a href="#mContext就是上下文。" class="headerlink" title="mContext就是上下文。"></a>mContext就是上下文。</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
 
 
   <nav id="page-nav">
@@ -1058,6 +1064,14 @@ android:layout_height=&quot;match_parent&quot; &gt;
       <ul>
         
           <li>
+            <a href="/2019/12/31/android 连接指定WiFi，判断是否连接成功等工具类/">android 连接指定WiFi，判断是否连接成功等工具类</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/31/手机删除密码文件暴力解锁/">手机删除密码文件暴力解锁</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/16/2019.12.16_某博给指定用户发送私信思路/">某博给指定用户发送私信思路</a>
           </li>
         
@@ -1067,14 +1081,6 @@ android:layout_height=&quot;match_parent&quot; &gt;
         
           <li>
             <a href="/2019/12/05/2019.12.05_Paython爬取网页所有图片并保存到本地/">Paython爬取网页所有图片并保存到本地</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/05/2019.12.05_修改微信步数/">修改微信步数</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/">Paython爬取微博用户userId</a>
           </li>
         
       </ul>

@@ -51,6 +51,285 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
+    <article id="post-android 连接指定WiFi，判断是否连接成功等工具类" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/31/android 连接指定WiFi，判断是否连接成功等工具类/">android 连接指定WiFi，判断是否连接成功等工具类</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/12/31/android 连接指定WiFi，判断是否连接成功等工具类/" class="article-date">
+  <time datetime="2019-12-31T10:45:11.170Z" itemprop="datePublished">2019-12-31</time>
+</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>package camera.app.com.backward.utils;</p>
+<p>import android.content.Context;<br>import android.net.wifi.WifiConfiguration;<br>import android.net.wifi.WifiInfo;<br>import android.net.wifi.WifiManager;<br>import android.support.annotation.NonNull;<br>import android.support.annotation.Nullable;<br>import android.util.Log;</p>
+<p>import java.lang.reflect.Method;<br>import java.util.List;</p>
+<p>public class WIFIConnectionManager {</p>
+<pre><code>private static final String TAG = WIFIConnectionManager.class.getName();
+private static WIFIConnectionManager sInstance = null;
+private android.net.wifi.WifiManager mWifiManager;
+private int networkId;
+
+
+public WIFIConnectionManager(Context context) {
+    mWifiManager = (android.net.wifi.WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+}
+
+public static WIFIConnectionManager getInstance(Context context) {
+    if (sInstance == null) {
+        synchronized (WIFIConnectionManager.class) {
+            if (sInstance == null) {
+                sInstance = new WIFIConnectionManager(context);
+            }
+        }
+    }
+    return sInstance;
+}
+
+
+/**
+ * 尝试连接指定wifi
+ *
+ * @param ssid     wifi名
+ * @param password 密码
+ * @return 是否连接成功
+ */
+public boolean connect(@NonNull String ssid, @NonNull String password) {
+    Log.d(TAG, &quot;connect() called with: ssid = [&quot; + ssid + &quot;], password = [&quot; + password + &quot;]&quot;);
+    Log.d(TAG, &quot;connect: wifi opened = &quot; + openWifi());
+    boolean isConnected = isConnected(ssid);//当前已连接至指定wifi
+    Log.d(TAG, &quot;connect: is already connected = &quot; + isConnected);
+    if (isConnected) {
+        return true;
+    }
+    networkId = mWifiManager.addNetwork(newWifiConfig(ssid, password, true));
+    boolean result = mWifiManager.enableNetwork(networkId, true);
+    Log.d(TAG, &quot;connect: network enabled = &quot; + result);
+    return result;
+}
+
+
+/**
+ * 根据wifi名与密码配置 WiFiConfiguration, 每次尝试都会先断开已有连接
+ *
+ * @param isClient 当前设备是作为客户端,还是作为服务端, 影响SSID和PWD
+ */
+@NonNull
+public WifiConfiguration newWifiConfig(String ssid, String password, boolean isClient) {
+    WifiConfiguration config = new WifiConfiguration();
+    config.allowedAuthAlgorithms.clear();
+    config.allowedGroupCiphers.clear();
+    config.allowedKeyManagement.clear();
+    config.allowedPairwiseCiphers.clear();
+    config.allowedProtocols.clear();
+    if (isClient) {//作为客户端, 连接服务端wifi热点时要加双引号
+        config.SSID = &quot;\&quot;&quot; + ssid + &quot;\&quot;&quot;;
+        config.preSharedKey = &quot;\&quot;&quot; + password + &quot;\&quot;&quot;;
+    } else {//作为服务端, 开放wifi热点时不需要加双引号
+        config.SSID = ssid;
+        config.preSharedKey = password;
+    }
+    config.hiddenSSID = true;
+    config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
+    config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
+    config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+    config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
+    config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
+    config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
+    config.status = WifiConfiguration.Status.ENABLED;
+    return config;
+}
+
+/**
+ * @return 热点是否已开启
+ */
+public boolean isWifiEnabled() {
+    try {
+        Method methodIsWifiApEnabled = WifiManager.class.getDeclaredMethod(&quot;isWifiApEnabled&quot;);
+        return (boolean) methodIsWifiApEnabled.invoke(mWifiManager);
+    } catch (Exception e) {
+        Log.e(TAG, &quot;isWifiEnabled: &quot;, e);
+        return false;
+    }
+}
+
+/**
+ * 是否已连接指定wifi
+ */
+public boolean isConnected(String ssid) {
+    WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+    if (wifiInfo == null) {
+        return false;
+    }
+    switch (wifiInfo.getSupplicantState()) {
+        case AUTHENTICATING:
+        case ASSOCIATING:
+        case ASSOCIATED:
+        case FOUR_WAY_HANDSHAKE:
+        case GROUP_HANDSHAKE:
+        case COMPLETED:
+            return wifiInfo.getSSID().replace(&quot;\&quot;&quot;, &quot;&quot;).equals(ssid);
+        default:
+            return false;
+    }
+}
+
+/**
+ * 打开WiFi
+ *
+ * @return
+ */
+public boolean openWifi() {
+    boolean opened = true;
+    if (!mWifiManager.isWifiEnabled()) {
+        opened = mWifiManager.setWifiEnabled(true);
+    }
+    return opened;
+}
+
+/**
+ * 关闭wifi
+ *
+ * @return
+ */
+public boolean closeWifi() {
+    boolean closed = true;
+    if (mWifiManager.isWifiEnabled()) {
+        closed = mWifiManager.setWifiEnabled(false);
+    }
+    return closed;
+}
+
+/**
+ * 断开连接
+ *
+ * @return
+ */
+public WIFIConnectionManager disconnect() {
+    if (networkId != 0) {
+        mWifiManager.disableNetwork(networkId);
+    }
+    mWifiManager.disconnect();
+    return this;
+}
+
+/**
+ * 是否连接过指定Wifi
+ */
+@Nullable
+public WifiConfiguration everConnected(String ssid) {
+    List&lt;WifiConfiguration&gt; existingConfigs = mWifiManager.getConfiguredNetworks();
+    if (existingConfigs == null || existingConfigs.isEmpty()) {
+        return null;
+    }
+    ssid = &quot;\&quot;&quot; + ssid + &quot;\&quot;&quot;;
+    for (WifiConfiguration existingConfig : existingConfigs) {
+        if (existingConfig.SSID.equals(ssid)) {
+            return existingConfig;
+        }
+    }
+    return null;
+}
+
+/**
+ * 获取本机的ip地址
+ */
+@Nullable
+public String getLocalIp() {
+    return convertIp(mWifiManager.getConnectionInfo().getIpAddress());
+}
+
+private String convertIp(int ipAddress) {
+    if (ipAddress == 0) return null;
+    return ((ipAddress &amp; 0xff) + &quot;.&quot; + (ipAddress &gt;&gt; 8 &amp; 0xff) + &quot;.&quot;
+            + (ipAddress &gt;&gt; 16 &amp; 0xff) + &quot;.&quot; + (ipAddress &gt;&gt; 24 &amp; 0xff));
+}
+
+public WifiManager getWifiManager() {
+    return mWifiManager;
+}
+</code></pre><p>}</p>
+<hr>
+<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-手机删除密码文件暴力解锁" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/31/手机删除密码文件暴力解锁/">手机删除密码文件暴力解锁</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/12/31/手机删除密码文件暴力解锁/" class="article-date">
+  <time datetime="2019-12-31T10:42:37.803Z" itemprop="datePublished">2019-12-31</time>
+</a>
+    
+    
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>手机密码锁，手势锁等其实都是在本地保存一个文件，暴力删除即可。</p>
+<p>手机连接电脑，然后打开cmd命令窗口输入</p>
+<p>1、adb shell</p>
+<p>2、su （获取root权限，$是普通权限，#是最高权限）</p>
+<p>3、cd data/system</p>
+<p>4、ls (列出所有文件)</p>
+<p>5、删除密码锁文件执行  rm locksettings.db</p>
+<p>需要删除的文件：如果有的话</p>
+<p>rm locksettings.db</p>
+<p>rm locksettings.db-shm</p>
+<p>rm locksettings.db-wa</p>
+<p>rm gesture.key</p>
+<p>rm password.key</p>
+<p>删除完后，在执行 ls看是否成功删除</p>
+<h2 id="最后重启手机"><a href="#最后重启手机" class="headerlink" title="最后重启手机"></a>最后重启手机</h2><p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-2019.12.16_某博给指定用户发送私信思路" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
   
     <header class="article-header">
@@ -395,94 +674,6 @@
 </article>
 
   
-    <article id="post-2018.12.26_抓取手机通知栏所有消息" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/">抓取手机状态栏所有通知消息</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2018/12/26/2018.12.26_抓取手机通知栏所有消息/" class="article-date">
-  <time datetime="2018-12-26T07:27:36.708Z" itemprop="datePublished">2018-12-26</time>
-</a>
-    
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <pre><code>在NotificationListenerService中使用
-  StatusBarNotification[] statusBarNotifications = getActiveNotifications();
-            for(StatusBarNotification statusBarNotification : statusBarNotifications) {
-                Bundle extras2 = statusBarNotification.getNotification().extras;
-                String title = extras2.getCharSequence(Notification.EXTRA_TITLE)+&quot;--标题&quot;;
-                String text = extras2.getCharSequence(Notification.EXTRA_TEXT)+&quot;--通知内容&quot;;
-                String packageName = statusBarNotification.getPackageName()+&quot;--包名&quot;;//包名字
-                long time = statusBarNotification.getPostTime();//时间
-        }
-</code></pre><hr>
-<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
-    <article id="post-2018.12.26_支付宝拉起红包链接" class="article global-container article-type-post" itemscope="" itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/26/2018.12.26_支付宝拉起红包链接/">支付宝自动跳转到搜索红包地址</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2018/12/26/2018.12.26_支付宝拉起红包链接/" class="article-date">
-  <time datetime="2018-12-26T07:13:56.873Z" itemprop="datePublished">2018-12-26</time>
-</a>
-    
-    
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <p>alipays://platformapi/startapp?requestType=hotword_b&amp;appId=20001003&amp;keyword=620066600</p>
-<hr>
-<p>作者：杰骜不驯丶<br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
 
 
   <nav id="page-nav">
@@ -548,6 +739,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/31/android 连接指定WiFi，判断是否连接成功等工具类/">android 连接指定WiFi，判断是否连接成功等工具类</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/31/手机删除密码文件暴力解锁/">手机删除密码文件暴力解锁</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/16/2019.12.16_某博给指定用户发送私信思路/">某博给指定用户发送私信思路</a>
           </li>
         
@@ -557,14 +756,6 @@
         
           <li>
             <a href="/2019/12/05/2019.12.05_Paython爬取网页所有图片并保存到本地/">Paython爬取网页所有图片并保存到本地</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/05/2019.12.05_修改微信步数/">修改微信步数</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/05/2019.12.05_Paython爬取微博userId/">Paython爬取微博用户userId</a>
           </li>
         
       </ul>
